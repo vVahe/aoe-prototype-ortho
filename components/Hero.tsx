@@ -54,7 +54,8 @@ export default function Hero({ onOpenBooking }: HeroProps) {
         </span>
         <button
           onClick={onOpenBooking}
-          className="shrink-0 rounded-full bg-white px-4 py-2 text-sm font-bold text-accent transition-opacity hover:opacity-90"
+          aria-label="Plan een gratis kennismaking"
+          className="shrink-0 rounded-full bg-white px-4 py-2 text-sm font-bold text-accent transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
           Gratis kennismaking
         </button>

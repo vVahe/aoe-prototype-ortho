@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="pb-16 md:pb-0">
+      <main id="main-content" className="pb-16 md:pb-0">
         <Hero onOpenBooking={openBooking} />
         <TrustBar />
         <TreatmentCards onOpenBooking={openBooking} />

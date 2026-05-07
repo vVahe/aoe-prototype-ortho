@@ -15,10 +15,26 @@
   --font-body: 'Inter', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-body);
   color: var(--color-neutral);
   background-color: var(--color-surface);
+}
+
+/* Offset sticky navbar (≈57px) so anchor targets aren't hidden */
+[id] {
+  scroll-margin-top: 64px;
+}
+
+/* Global keyboard focus ring */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 @keyframes accordion-down {

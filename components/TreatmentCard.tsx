@@ -70,7 +70,7 @@ function TreatmentCardItem({ treatment, onOpenBooking }: TreatmentCardProps) {
 
       <button
         onClick={onOpenBooking}
-        className="mt-auto w-full rounded-full bg-accent py-3 text-sm font-semibold text-white transition-all hover:brightness-90"
+        className="mt-auto w-full rounded-full bg-accent py-3 text-sm font-semibold text-white transition-all hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/30"
       >
         Gratis consult aanvragen
       </button>

@@ -163,7 +163,7 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
 
               <button
                 type="submit"
-                className="w-full rounded-full bg-accent py-3 text-sm font-semibold text-white transition-all hover:brightness-90"
+                className="w-full rounded-full bg-accent py-3 text-sm font-semibold text-white transition-all hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/30"
               >
                 Verstuur aanvraag
               </button>

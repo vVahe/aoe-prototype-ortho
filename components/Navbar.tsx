@@ -21,7 +21,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="border-b-2 border-transparent pb-0.5 transition-colors hover:border-accent hover:text-accent"
+                className="rounded border-b-2 border-transparent pb-0.5 transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               >
                 {link.label}
               </a>
