@@ -17,6 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://orthodeboog.nl'),
   title: 'Orthodontist in Utrecht | De Boog — Beugel & Aligners',
   description:
     'Orthodontist in Utrecht voor kinderen én volwassenen. Vaste beugel vanaf €2.400, transparante aligners vanaf €3.200. ANO-gecertificeerd. Gratis kennismaking.',
