@@ -1,0 +1,34 @@
+import { PRACTICE_INFO } from '@/lib/constants';
+
+const navLinks = [
+  { label: 'Home', href: '#home' },
+  { label: 'Behandelingen', href: '#behandelingen' },
+  { label: 'Resultaten', href: '#resultaten' },
+  { label: 'Over ons', href: '#over-ons' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Contact', href: '#contact' },
+];
+
+export default function Navbar() {
+  return (
+    <nav className="sticky top-0 z-40 hidden border-b border-border bg-surface shadow-sm md:flex">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3">
+        <a href="#home" className="font-heading text-lg font-bold text-primary">
+          {PRACTICE_INFO.name}
+        </a>
+        <ul className="flex items-center gap-6 text-sm font-medium text-primary">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className="border-b-2 border-transparent pb-0.5 transition-colors hover:border-accent hover:text-accent"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  );
+}
