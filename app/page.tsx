@@ -1,17 +1,18 @@
 'use client';
 
+import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import TrustBar from '@/components/TrustBar';
 import TreatmentCards from '@/components/TreatmentCard';
 import CTASection from '@/components/CTASection';
 import BeforeAfter from '@/components/BeforeAfter';
+import FAQ from '@/components/FAQ';
+import BookingModal from '@/components/BookingModal';
 import LocationSection from '@/components/LocationSection';
 import Footer from '@/components/Footer';
 
 export default function Home() {
-  const openBooking = () => {
-    // BookingModal wired in Phase 4
-  };
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <>
@@ -28,8 +29,8 @@ export default function Home() {
         </section>
 
         <TrustBar />
-        <TreatmentCards onOpenBooking={openBooking} />
-        <CTASection onOpen={openBooking} />
+        <TreatmentCards onOpenBooking={() => setModalOpen(true)} />
+        <CTASection onOpen={() => setModalOpen(true)} />
         <BeforeAfter />
 
         {/* AuthorityBio placeholder — Phase 5 */}
@@ -37,15 +38,12 @@ export default function Home() {
           Over ons — Phase 5
         </section>
 
-        {/* FAQ placeholder — Phase 4 */}
-        <section id="faq" className="py-8 text-center text-muted text-sm">
-          FAQ — Phase 4
-        </section>
-
-        <CTASection onOpen={openBooking} />
+        <FAQ />
+        <CTASection onOpen={() => setModalOpen(true)} />
         <LocationSection />
       </main>
       <Footer />
+      <BookingModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 }
