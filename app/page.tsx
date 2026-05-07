@@ -1,9 +1,18 @@
+'use client';
+
 import Navbar from '@/components/Navbar';
 import TrustBar from '@/components/TrustBar';
+import TreatmentCards from '@/components/TreatmentCard';
+import CTASection from '@/components/CTASection';
+import BeforeAfter from '@/components/BeforeAfter';
 import LocationSection from '@/components/LocationSection';
 import Footer from '@/components/Footer';
 
 export default function Home() {
+  const openBooking = () => {
+    // BookingModal wired in Phase 4
+  };
+
   return (
     <>
       <Navbar />
@@ -19,27 +28,21 @@ export default function Home() {
         </section>
 
         <TrustBar />
-
-        {/* Treatment cards placeholder — Phase 3 */}
-        <section id="behandelingen" className="py-8 text-center text-muted text-sm">
-          Behandelingen — Phase 3
-        </section>
-
-        {/* Before/After placeholder — Phase 3 */}
-        <section id="resultaten" className="py-8 text-center text-muted text-sm bg-secondary">
-          Resultaten — Phase 3
-        </section>
+        <TreatmentCards onOpenBooking={openBooking} />
+        <CTASection onOpen={openBooking} />
+        <BeforeAfter />
 
         {/* AuthorityBio placeholder — Phase 5 */}
-        <section id="over-ons" className="py-8 text-center text-muted text-sm">
+        <section id="over-ons" className="py-8 text-center text-muted text-sm bg-secondary">
           Over ons — Phase 5
         </section>
 
         {/* FAQ placeholder — Phase 4 */}
-        <section id="faq" className="py-8 text-center text-muted text-sm bg-secondary">
+        <section id="faq" className="py-8 text-center text-muted text-sm">
           FAQ — Phase 4
         </section>
 
+        <CTASection onOpen={openBooking} />
         <LocationSection />
       </main>
       <Footer />
