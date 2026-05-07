@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-primary: #0F5F6E;
+  --color-secondary: #E6F4F6;
+  --color-accent: #E8654A;
+  --color-neutral: #1E2A32;
+  --color-muted: #5A6A72;
+  --color-border: #D1E8EC;
+  --color-surface: #FFFFFF;
+
+  /* Fonts */
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-neutral);
+  background-color: var(--color-surface);
+}
