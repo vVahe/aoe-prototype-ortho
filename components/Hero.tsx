@@ -6,9 +6,13 @@ import { PRACTICE_INFO } from '@/lib/constants';
 
 interface HeroProps {
   onOpenBooking: () => void;
+  practice?: { name: string; city: string; photos?: string[] };
 }
 
-export default function Hero({ onOpenBooking }: HeroProps) {
+export default function Hero({ onOpenBooking, practice }: HeroProps) {
+  const city = practice?.city ?? 'Utrecht';
+  const name = practice?.name ?? PRACTICE_INFO.name;
+  const heroSrc = practice?.photos?.[0] ?? '/images/hero.jpg';
   const [heroFailed, setHeroFailed] = useState(false);
 
   return (
@@ -18,7 +22,7 @@ export default function Hero({ onOpenBooking }: HeroProps) {
           {/* Text — always first on mobile, left on desktop */}
           <div className="order-1">
             <h1 className="font-heading mb-4 text-4xl font-bold leading-tight text-primary md:text-5xl">
-              De orthodontist in Utrecht voor een rechte lach, op elke leeftijd.
+              De orthodontist in {city} voor een rechte lach, op elke leeftijd.
             </h1>
             <p className="mb-8 text-base leading-relaxed text-neutral md:text-lg">
               Of je nu 14 of 44 bent — wij behandelen kinderen én volwassenen met de
@@ -45,7 +49,7 @@ export default function Hero({ onOpenBooking }: HeroProps) {
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src="/images/hero.jpg"
+                  src={heroSrc}
                   alt="Rechte tanden na orthodontische behandeling bij De Boog Utrecht"
                   className="h-full w-full object-cover"
                   onError={() => setHeroFailed(true)}
@@ -59,7 +63,7 @@ export default function Hero({ onOpenBooking }: HeroProps) {
       {/* Mobile sticky CTA bar */}
       <div className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between bg-accent px-4 py-3 md:hidden">
         <span className="text-sm font-semibold text-white truncate pr-2">
-          {PRACTICE_INFO.name}
+          {name}
         </span>
         <button
           onClick={onOpenBooking}

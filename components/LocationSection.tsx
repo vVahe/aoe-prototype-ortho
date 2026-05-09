@@ -1,7 +1,7 @@
 import { PRACTICE_INFO } from '@/lib/constants';
 import { MapPin, Car, Bus, Bike, Clock } from 'lucide-react';
 
-const hours = [
+const FALLBACK_HOURS = [
   { day: 'Maandag', time: PRACTICE_INFO.hours.monday },
   { day: 'Dinsdag', time: PRACTICE_INFO.hours.tuesday },
   { day: 'Woensdag', time: PRACTICE_INFO.hours.wednesday },
@@ -11,12 +11,38 @@ const hours = [
   { day: 'Zondag', time: PRACTICE_INFO.hours.sunday, closed: true },
 ];
 
-export default function LocationSection() {
+function parseWeekdayText(lines: string[]) {
+  return lines.map((line) => {
+    const sep = line.indexOf(': ');
+    const day  = sep > 0 ? line.slice(0, sep) : line;
+    const time = sep > 0 ? line.slice(sep + 2) : '';
+    const dayLower = day.toLowerCase();
+    return {
+      day: day.charAt(0).toUpperCase() + day.slice(1),
+      time,
+      highlight: dayLower.includes('zaterdag') || dayLower.includes('saturday'),
+      closed: /gesloten|closed/i.test(time),
+    };
+  });
+}
+
+export default function LocationSection({
+  practice,
+  hours: hoursProp,
+}: {
+  practice?: { city: string; address: string };
+  hours?: { weekdayText: string[] };
+} = {}) {
+  const city    = practice?.city    ?? 'Utrecht';
+  const address = practice?.address ?? PRACTICE_INFO.address;
+  const hours   = hoursProp?.weekdayText?.length
+    ? parseWeekdayText(hoursProp.weekdayText)
+    : FALLBACK_HOURS;
   return (
     <section id="contact" className="bg-surface py-16">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="font-heading mb-2 text-3xl font-bold text-primary md:text-4xl">
-          Makkelijk te bereiken in Utrecht
+          Makkelijk te bereiken in {city}
         </h2>
         <p className="mb-10 text-muted">
           Centraal gelegen — goed bereikbaar per auto, bus en fiets.
@@ -30,7 +56,7 @@ export default function LocationSection() {
               <MapPin className="mt-1 h-5 w-5 shrink-0 text-primary" />
               <div>
                 <p className="font-semibold text-neutral">
-                  {PRACTICE_INFO.address}
+                  {address}
                 </p>
               </div>
             </div>

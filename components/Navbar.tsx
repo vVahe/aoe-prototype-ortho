@@ -9,12 +9,14 @@ const navLinks = [
   { label: 'Contact', href: '#contact' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ practiceName, noSticky }: { practiceName?: string; noSticky?: boolean }) {
+  const name = practiceName ?? PRACTICE_INFO.name;
+  const positionClasses = noSticky ? '' : 'sticky top-0 z-40';
   return (
-    <nav className="sticky top-0 z-40 hidden border-b border-border bg-surface shadow-sm md:flex">
+    <nav className={`${positionClasses} hidden border-b border-border bg-surface shadow-sm md:flex`}>
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3">
         <a href="#home" className="font-heading text-lg font-bold text-primary">
-          {PRACTICE_INFO.name}
+          {name}
         </a>
         <ul className="flex items-center gap-6 text-sm font-medium text-primary">
           {navLinks.map((link) => (

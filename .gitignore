@@ -13,6 +13,11 @@ node_modules/
 # Vercel
 .vercel
 
+# Prospect data (competitive info — lives in Vercel env var PROSPECTS_JSON)
+data/prospects.json
+data/place-ids.json
+public/images/prospects/
+
 # Misc
 .DS_Store
 *.pem
