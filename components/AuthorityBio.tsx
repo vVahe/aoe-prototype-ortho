@@ -68,6 +68,7 @@ function TestimonialCarousel() {
 
 export default function AuthorityBio() {
   const { doctor } = PRACTICE_INFO;
+  const [doctorFailed, setDoctorFailed] = useState(false);
 
   return (
     <section id="over-ons" className="bg-secondary py-16">
@@ -76,13 +77,19 @@ export default function AuthorityBio() {
           {/* Doctor image */}
           <div className="flex justify-center md:justify-start">
             <div className="relative h-80 w-64 overflow-hidden rounded-2xl shadow-lg md:h-96 md:w-72">
-              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 to-secondary">
-                <UserCircle2 className="h-32 w-32 text-primary/40" />
-              </div>
-              {/* Alt text preserved for when real photo is placed at /images/doctor.jpg */}
-              <span className="sr-only">
-                Dr. Emma van den Berg, orthodontist in Utrecht
-              </span>
+              {doctorFailed ? (
+                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 to-secondary">
+                  <UserCircle2 className="h-32 w-32 text-primary/40" />
+                </div>
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src="/images/doctor.jpg"
+                  alt="Dr. Emma van den Berg, orthodontist in Utrecht"
+                  className="h-full w-full object-cover object-top"
+                  onError={() => setDoctorFailed(true)}
+                />
+              )}
             </div>
           </div>
 

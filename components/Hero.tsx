@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { UserCircle } from 'lucide-react';
 import { PRACTICE_INFO } from '@/lib/constants';
 
@@ -8,6 +9,8 @@ interface HeroProps {
 }
 
 export default function Hero({ onOpenBooking }: HeroProps) {
+  const [heroFailed, setHeroFailed] = useState(false);
+
   return (
     <section id="home" className="bg-surface">
       <div className="mx-auto max-w-6xl px-4 py-12 md:py-20">
@@ -35,13 +38,19 @@ export default function Hero({ onOpenBooking }: HeroProps) {
           {/* Image — below text on mobile, right on desktop */}
           <div className="order-2 flex justify-center md:justify-end">
             <div className="relative h-72 w-full max-w-sm overflow-hidden rounded-2xl shadow-lg md:h-96 md:max-w-none">
-              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-secondary to-primary/10">
-                <UserCircle className="h-36 w-36 text-primary/30" />
-              </div>
-              {/* Real photo drops in at /public/images/hero.jpg — see handoff notes */}
-              <span className="sr-only">
-                Rechte tanden na orthodontische behandeling bij De Boog Utrecht
-              </span>
+              {heroFailed ? (
+                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-secondary to-primary/10">
+                  <UserCircle className="h-36 w-36 text-primary/30" />
+                </div>
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src="/images/hero.jpg"
+                  alt="Rechte tanden na orthodontische behandeling bij De Boog Utrecht"
+                  className="h-full w-full object-cover"
+                  onError={() => setHeroFailed(true)}
+                />
+              )}
             </div>
           </div>
         </div>

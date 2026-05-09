@@ -1,42 +1,27 @@
+'use client';
+
+import { useState } from 'react';
 import { BEFORE_AFTER_CASES } from '@/lib/constants';
 
-function ImagePlaceholder({
-  label,
-  side,
-}: {
-  label: string;
-  side: 'before' | 'after';
-}) {
-  return (
-    <div
-      className={`relative flex h-48 w-full items-center justify-center ${
-        side === 'before'
-          ? 'bg-gradient-to-br from-neutral/20 to-muted/30'
-          : 'bg-gradient-to-br from-primary/20 to-secondary'
-      }`}
-    >
-      <span
-        className={`absolute ${side === 'before' ? 'left-2' : 'right-2'} top-2 rounded px-2 py-0.5 text-xs font-semibold text-white ${
-          side === 'before' ? 'bg-neutral/70' : 'bg-primary/80'
-        }`}
-      >
-        {label}
-      </span>
-      <span className="text-xs text-muted">{label === 'Voor' ? 'Foto volgt' : 'Resultaat volgt'}</span>
-    </div>
-  );
-}
-
 function CaseCard({ c }: { c: (typeof BEFORE_AFTER_CASES)[number] }) {
+  const [failed, setFailed] = useState(false);
+
   return (
     <div className="overflow-hidden rounded-xl bg-secondary shadow-sm">
-      <div className="flex">
-        <div className="w-1/2">
-          <ImagePlaceholder label="Voor" side="before" />
-        </div>
-        <div className="w-1/2 border-l-2 border-white">
-          <ImagePlaceholder label="Na" side="after" />
-        </div>
+      <div className="relative h-56 w-full">
+        {failed ? (
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-neutral/20 to-primary/10">
+            <span className="text-xs text-muted">Foto volgt</span>
+          </div>
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={c.image}
+            alt={`Voor en na behandeling: ${c.treatment}`}
+            className="h-full w-full object-cover"
+            onError={() => setFailed(true)}
+          />
+        )}
       </div>
 
       <div className="space-y-1 px-4 py-4">
