@@ -96,7 +96,7 @@ const FIELD_MASK = [
 ].join(',');
 
 async function fetchPlaceDetails(placeId: string): Promise<PlaceResult> {
-  const res = await fetch(`https://places.googleapis.com/v1/places/${placeId}`, {
+  const res = await fetch(`https://places.googleapis.com/v1/places/${placeId}?languageCode=nl`, {
     headers: {
       'X-Goog-Api-Key': API_KEY!,
       'X-Goog-FieldMask': FIELD_MASK,
@@ -208,12 +208,12 @@ async function main() {
           count: place.userRatingCount,
           source: 'google',
           items: place.reviews?.map(r => ({
-            author: r.authorAttribution?.displayName,
-            rating: r.rating,
-            text: r.text?.text,
-            date: r.publishTime,
-            language: r.text?.languageCode,
-          })),
+              author: r.authorAttribution?.displayName,
+              rating: r.rating,
+              text: r.text?.text,
+              date: r.publishTime,
+              language: r.text?.languageCode,
+            })),
         },
         hours: {
           weekdayText: place.regularOpeningHours?.weekdayDescriptions,

@@ -13,6 +13,7 @@ import BookingModal from '@/components/BookingModal';
 import LocationSection from '@/components/LocationSection';
 import ReviewsSection from '@/components/ReviewsSection';
 import Footer from '@/components/Footer';
+import { TESTIMONIALS, PRACTICE_INFO } from '@/lib/constants';
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -29,7 +30,11 @@ export default function Home() {
         <BeforeAfter />
         <AuthorityBio />
         <FAQ />
-        <ReviewsSection />
+        <ReviewsSection
+          items={TESTIMONIALS.map((t) => ({ author: t.name, text: t.text, rating: t.stars }))}
+          rating={parseFloat(PRACTICE_INFO.trustSignals.rating)}
+          count={parseInt(PRACTICE_INFO.trustSignals.reviewCount, 10)}
+        />
         <CTASection onOpen={openBooking} />
         <LocationSection />
       </main>

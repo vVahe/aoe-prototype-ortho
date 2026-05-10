@@ -91,7 +91,7 @@ export type ProspectView = {
     photos?: string[];
   };
   doctor: { name: string; salutation: string };
-  reviews: { rating: number; count: number };
+  reviews: { rating: number; count: number; items: ReviewItem[] };
   hours: { weekdayText: string[] };
   location: { parking: string; publicTransport: string };
   outreach: OutreachInfo;
@@ -153,6 +153,7 @@ export function getProspectView(prospect: Prospect): ProspectView {
     reviews: {
       rating: reviews?.rating ?? 4.9,
       count: reviews?.count ?? 0,
+      items: reviews?.items ?? [],
     },
     hours: {
       weekdayText: hours?.weekdayText ?? [],

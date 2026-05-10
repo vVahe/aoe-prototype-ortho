@@ -41,7 +41,7 @@ export default function ProspectPageClient({ view }: { view: ProspectView }) {
         <BeforeAfter />
         <AuthorityBio doctor={view.doctor} />
         <FAQ />
-        <ReviewsSection />
+        <ReviewsSection items={view.reviews.items} rating={view.reviews.rating} count={view.reviews.count} />
         <CTASection onOpen={openBooking} />
         <LocationSection practice={view.practice} hours={view.hours} />
       </main>

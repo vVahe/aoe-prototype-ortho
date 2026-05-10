@@ -16,11 +16,15 @@ export default function B2BBanner({ practiceName, slug }: B2BBannerProps) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    if (localStorage.getItem(storageKey) === 'true') setVisible(false);
+    try {
+      if (localStorage.getItem(storageKey) === 'true') setVisible(false);
+    } catch {}
   }, [storageKey]);
 
   function dismiss() {
-    localStorage.setItem(storageKey, 'true');
+    try {
+      localStorage.setItem(storageKey, 'true');
+    } catch {}
     setVisible(false);
   }
 

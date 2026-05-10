@@ -1,5 +1,5 @@
+import { Users, Clock, Shield, GraduationCap, BadgeCheck } from 'lucide-react';
 import { PRACTICE_INFO } from '@/lib/constants';
-import { Users, Clock, Star, Shield, GraduationCap, BadgeCheck } from 'lucide-react';
 
 type Block = { kind: 'stat'; value: string; label: string; icon: React.ElementType };
 
@@ -34,19 +34,13 @@ const blocks: Block[] = [
     value: PRACTICE_INFO.trustSignals.experience,
     label: 'gespecialiseerde orthodontie',
   },
-  {
-    kind: 'stat',
-    icon: Star,
-    value: PRACTICE_INFO.trustSignals.rating,
-    label: `${PRACTICE_INFO.trustSignals.reviewCount} Google-recensies`,
-  },
 ];
 
 export default function TrustBar() {
   return (
     <section className="bg-secondary">
       <div className="mx-auto max-w-6xl px-4 py-8">
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
           {blocks.map((block) => {
             const Icon = block.icon;
             return (
