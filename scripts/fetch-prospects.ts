@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import sharp from 'sharp';
 
 // ── Env ───────────────────────────────────────────────────────────────────────
 
@@ -59,7 +60,7 @@ interface PlaceResult {
     weekdayDescriptions?: string[];
     periods?: { open: OpeningHoursPeriodPoint; close: OpeningHoursPeriodPoint }[];
   };
-  photos?: { name: string; widthPx: number; heightPx: number }[];
+  photos?: { name: string; widthPx: number; heightPx: number; authorAttributions?: { displayName: string; uri: string; photoUri: string }[] }[];
   businessStatus?: string;
   primaryTypeDisplayName?: { text: string; languageCode: string };
   location?: { latitude: number; longitude: number };
@@ -107,12 +108,12 @@ async function fetchPlaceDetails(placeId: string): Promise<PlaceResult> {
 
 async function downloadPhoto(photoName: string, destPath: string): Promise<void> {
   if (fs.existsSync(destPath)) return;
-  const url = `https://places.googleapis.com/v1/${photoName}/media?maxWidthPx=1200&key=${API_KEY}`;
+  const url = `https://places.googleapis.com/v1/${photoName}/media?maxWidthPx=1600&key=${API_KEY}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Photo fetch ${res.status}`);
   const buf = Buffer.from(await res.arrayBuffer());
   fs.mkdirSync(path.dirname(destPath), { recursive: true });
-  fs.writeFileSync(destPath, buf);
+  await sharp(buf).webp({ quality: 80 }).toFile(destPath);
 }
 
 function fromAddressComponents(components: AddressComponent[] | undefined, type: string) {
@@ -163,6 +164,7 @@ async function main() {
     process.stdout.write(`  → ${placeId} … `);
     try {
       const place = await fetchPlaceDetails(placeId);
+      const prev  = existing[placeId];
       const name  = place.displayName?.text ?? placeId;
       const slug  = (prev?.slug as string | undefined) ?? toSlug(name);
       const city  =
@@ -170,16 +172,20 @@ async function main() {
         fromAddressComponents(place.addressComponents, 'administrative_area_level_2');
       const postalCode = fromAddressComponents(place.addressComponents, 'postal_code');
 
-      // Download up to 3 photos; skip if file already exists
+      // Filter to landscape photos (width/height >= 1.2) to favour professional/owner shots,
+      // then sort by pixel area descending so highest-quality images come first.
+      const candidatePhotos = (place.photos ?? [])
+        .filter(p => p.widthPx / p.heightPx >= 1.2)
+        .sort((a, b) => (b.widthPx * b.heightPx) - (a.widthPx * a.heightPx))
+        .slice(0, 5);
+
       const photos: string[] = [];
-      for (const photo of (place.photos ?? []).slice(0, 3)) {
-        const filename = `${photos.length + 1}.jpg`;
+      for (const photo of candidatePhotos) {
+        const filename = `${photos.length + 1}.webp`;
         const destPath = path.join(PHOTOS_BASE, slug, filename);
         await downloadPhoto(photo.name, destPath);
         photos.push(`/images/prospects/${slug}/${filename}`);
       }
-
-      const prev = existing[placeId];
 
       results.push({
         slug,

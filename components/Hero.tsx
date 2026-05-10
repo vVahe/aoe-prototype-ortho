@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { UserCircle } from 'lucide-react';
 import { PRACTICE_INFO } from '@/lib/constants';
 
@@ -47,12 +48,14 @@ export default function Hero({ onOpenBooking, practice }: HeroProps) {
                   <UserCircle className="h-36 w-36 text-primary/30" />
                 </div>
               ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={heroSrc}
                   alt="Rechte tanden na orthodontische behandeling bij De Boog Utrecht"
-                  className="h-full w-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 384px, 50vw"
+                  className="object-cover"
                   onError={() => setHeroFailed(true)}
+                  priority
                 />
               )}
             </div>
