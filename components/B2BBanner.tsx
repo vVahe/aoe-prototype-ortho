@@ -5,12 +5,12 @@ import { X } from 'lucide-react';
 
 type B2BBannerProps = {
   practiceName: string;
-  city: string;
-  operatorName: string;
+  city?: string;
+  operatorName?: string;
   slug: string;
 };
 
-export default function B2BBanner({ practiceName, city, operatorName, slug }: B2BBannerProps) {
+export default function B2BBanner({ practiceName, slug }: B2BBannerProps) {
   const storageKey = `demoBannerDismissed:${slug}`;
   // Start visible; suppress on client if already dismissed
   const [visible, setVisible] = useState(true);
@@ -33,9 +33,7 @@ export default function B2BBanner({ practiceName, city, operatorName, slug }: B2
           <p className="text-sm font-semibold text-white">
             Demo gemaakt voor{' '}
             <span className="text-accent">{practiceName}</span>
-            {city ? ` — ${city}` : ''}
           </p>
-          <p className="text-xs text-white/50">door {operatorName}</p>
         </div>
         <button
           onClick={dismiss}

@@ -1,23 +1,41 @@
 import { PRACTICE_INFO } from '@/lib/constants';
-import { ShieldCheck, Users, Clock, Star } from 'lucide-react';
+import { Users, Clock, Star, Shield, GraduationCap, BadgeCheck } from 'lucide-react';
 
-const signals = [
+type Block = { kind: 'stat'; value: string; label: string; icon: React.ElementType };
+
+const blocks: Block[] = [
   {
-    icon: ShieldCheck,
-    value: 'ANO-lid',
-    label: 'Associatie Nederlandse Orthodontisten',
+    kind: 'stat',
+    icon: Shield,
+    value: 'KNMT',
+    label: 'Aangesloten bij',
   },
   {
+    kind: 'stat',
+    icon: GraduationCap,
+    value: 'NVvO',
+    label: 'Aangesloten bij',
+  },
+  {
+    kind: 'stat',
+    icon: BadgeCheck,
+    value: 'ISO 9001',
+    label: 'gecertificeerd',
+  },
+  {
+    kind: 'stat',
     icon: Users,
     value: PRACTICE_INFO.trustSignals.patients,
     label: 'behandelde patiënten',
   },
   {
+    kind: 'stat',
     icon: Clock,
     value: PRACTICE_INFO.trustSignals.experience,
     label: 'gespecialiseerde orthodontie',
   },
   {
+    kind: 'stat',
     icon: Star,
     value: PRACTICE_INFO.trustSignals.rating,
     label: `${PRACTICE_INFO.trustSignals.reviewCount} Google-recensies`,
@@ -28,19 +46,19 @@ export default function TrustBar() {
   return (
     <section className="bg-secondary">
       <div className="mx-auto max-w-6xl px-4 py-8">
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          {signals.map((signal) => {
-            const Icon = signal.icon;
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+          {blocks.map((block) => {
+            const Icon = block.icon;
             return (
               <div
-                key={signal.label}
+                key={block.value}
                 className="flex flex-col items-center gap-1 text-center"
               >
                 <Icon className="mb-1 h-6 w-6 text-primary" />
                 <span className="font-heading text-2xl font-bold text-primary">
-                  {signal.value}
+                  {block.value}
                 </span>
-                <span className="text-xs text-muted">{signal.label}</span>
+                <span className="text-xs text-muted">{block.label}</span>
               </div>
             );
           })}

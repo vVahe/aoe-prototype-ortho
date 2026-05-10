@@ -1,20 +1,84 @@
 import { PRACTICE_INFO } from '@/lib/constants';
-import { Phone, Mail, MapPin, Instagram, Facebook, Star } from 'lucide-react';
+import { Phone, Mail, MapPin, Instagram, Facebook, BadgeCheck } from 'lucide-react';
+import Image from 'next/image';
 
 type FooterProps = {
-  practice?: { name: string; phone: string; email: string; address: string };
+  practice?: { name: string; phone: string; email?: string; address: string; website?: string };
   hours?: { weekdayText: string[] };
 };
+
+function deriveEmail(practice?: FooterProps['practice']): string {
+  if (practice?.email) return practice.email;
+  if (practice?.website) {
+    try {
+      const hostname = new URL(practice.website).hostname.replace(/^www\./, '');
+      return `info@${hostname}`;
+    } catch {
+      // fall through
+    }
+  }
+  return PRACTICE_INFO.email;
+}
+
+function parseHoursRows(weekdayText: string[]): { day: string; hours: string }[] {
+  return weekdayText.map((line) => {
+    const idx = line.indexOf(':');
+    if (idx === -1) return { day: line, hours: '' };
+    return { day: line.slice(0, idx), hours: line.slice(idx + 1).trim() };
+  });
+}
 
 export default function Footer({ practice, hours }: FooterProps = {}) {
   const name    = practice?.name    ?? PRACTICE_INFO.name;
   const phone   = practice?.phone   ?? PRACTICE_INFO.phone;
-  const email   = practice?.email   ?? PRACTICE_INFO.email;
+  const email   = deriveEmail(practice);
   const address = practice?.address ?? PRACTICE_INFO.address;
   const weekdayText = hours?.weekdayText ?? [];
+  const hoursRows = parseHoursRows(weekdayText);
+
   return (
     <footer className="bg-primary text-white">
       <div className="mx-auto max-w-6xl px-4 py-12">
+
+        {/* Practice identity header */}
+        <div className="mb-10 border-b border-white/20 pb-8">
+          <p className="font-heading text-xl font-semibold">{name}</p>
+          <div className="mt-4 flex flex-wrap items-center gap-4">
+            <span className="flex items-center gap-1.5 text-sm text-white/70">
+              <BadgeCheck className="h-4 w-4 text-accent" />
+              ISO 9001 gecertificeerd
+            </span>
+            <a
+              href="https://knmt.nl/loopbaan/tandartsspecialisten/orthodontisten-in-de-knmt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md bg-white px-3 py-1.5 transition-opacity hover:opacity-80"
+            >
+              <Image
+                src="/images/asssociations/knmt-logo.svg"
+                alt="KNMT"
+                width={80}
+                height={22}
+                className="object-contain"
+              />
+            </a>
+            <a
+              href="https://www.orthodontist.nl/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md bg-white px-3 py-1.5 transition-opacity hover:opacity-80"
+            >
+              <Image
+                src="/images/asssociations/nvvo-logo.svg"
+                alt="NVvO"
+                width={72}
+                height={22}
+                className="object-contain"
+              />
+            </a>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {/* Contact */}
           <div>
@@ -29,29 +93,37 @@ export default function Footer({ practice, hours }: FooterProps = {}) {
                   {phone}
                 </a>
               </li>
-              {email && (
-                <li>
-                  <a
-                    href={`mailto:${email}`}
-                    className="flex items-center gap-2 transition-colors hover:text-accent"
-                  >
-                    <Mail className="h-4 w-4 shrink-0" />
-                    {email}
-                  </a>
-                </li>
-              )}
+              <li>
+                <a
+                  href={`mailto:${email}`}
+                  className="flex items-center gap-2 transition-colors hover:text-accent"
+                >
+                  <Mail className="h-4 w-4 shrink-0" />
+                  {email}
+                </a>
+              </li>
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
                 <span>{address}</span>
               </li>
-              {weekdayText.length > 0 && (
-                <li className="pt-1 space-y-0.5">
-                  {weekdayText.map((line) => (
-                    <span key={line} className="block">{line}</span>
-                  ))}
-                </li>
-              )}
             </ul>
+
+            {/* Opening hours */}
+            {hoursRows.length > 0 && (
+              <div className="mt-6">
+                <h3 className="font-heading mb-3 text-lg font-semibold">Openingstijden</h3>
+                <table className="w-full text-sm text-white/80">
+                  <tbody>
+                    {hoursRows.map(({ day, hours: h }) => (
+                      <tr key={day}>
+                        <td className="py-0.5 pr-4 font-medium">{day}</td>
+                        <td className="py-0.5 text-white/60">{h || 'Gesloten'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
 
           {/* Behandelingen */}
@@ -92,7 +164,7 @@ export default function Footer({ practice, hours }: FooterProps = {}) {
 
         {/* Bottom bar */}
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/20 pt-6 text-sm text-white/60 md:flex-row">
-          <span>© 2026 {name} · ANO-gecertificeerd</span>
+          <span>© 2026 {name}</span>
           <div className="flex items-center gap-4">
             <a
               href="#"
@@ -107,13 +179,6 @@ export default function Footer({ practice, hours }: FooterProps = {}) {
               className="transition-colors hover:text-accent"
             >
               <Facebook className="h-5 w-5" />
-            </a>
-            <a
-              href="#"
-              aria-label="Google Reviews"
-              className="transition-colors hover:text-accent"
-            >
-              <Star className="h-5 w-5" />
             </a>
           </div>
         </div>
