@@ -30,7 +30,7 @@ export default function ReviewsSection({
   rating: number;
   count: number;
 }) {
-  const visible = items.filter((r) => r.text && r.author);
+  const visible = items.filter((r) => r.text && r.author && (r.rating ?? 0) >= 4);
 
   // Duplicate enough times so the track always exceeds the viewport width.
   // With very few cards (e.g. 2) a single duplication isn't enough — the

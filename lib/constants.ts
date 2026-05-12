@@ -44,6 +44,8 @@ export const TREATMENTS = [
     description:
       'De klassieke vaste beugel voor kinderen en tieners. Nauwkeurig, bewezen effectief, en geschikt voor complexe gevallen.',
     priceFrom: '€2.400',
+    insuranceNote:
+      'Mogelijk (deels) vergoed via aanvullende verzekering — wij checken dit voor je.',
     duration: '12–24 maanden',
     targetAudience: 'Kinderen & tieners',
     faq: [
@@ -52,8 +54,8 @@ export const TREATMENTS = [
         a: 'De eerste dagen voel je wat spanning. Dit trekt snel weg.',
       },
       {
-        q: 'Wordt dit vergoed?',
-        a: 'Kinderen tot 18 jaar kunnen aanspraak maken op vergoeding bij indicatie. Wij controleren dit gratis.',
+        q: 'Hoe lang duurt een behandeling met een vaste beugel?',
+        a: 'Gemiddeld 18 tot 24 maanden, afhankelijk van de complexiteit. Bij kinderen en tieners verloopt de tandverplaatsing vaak iets sneller dan bij volwassenen.',
       },
     ],
   },
@@ -62,8 +64,10 @@ export const TREATMENTS = [
     icon: 'Layers',
     title: 'Transparante Aligner',
     description:
-      'Bijna onzichtbare plastic trays die je tanden stap voor stap recht zetten. Uitneembaar, comfortabel en ideaal voor volwassenen.',
+      'Bijna onzichtbare plastic trays — ook bekend als Invisalign. Uitneembaar, comfortabel en ideaal voor volwassenen die discreet willen behandelen.',
     priceFrom: '€3.200',
+    insuranceNote:
+      'Mogelijk (deels) vergoed via aanvullende verzekering — wij checken dit voor je.',
     duration: '6–18 maanden',
     targetAudience: 'Volwassenen & tieners',
     faq: [
@@ -82,18 +86,18 @@ export const TREATMENTS = [
     icon: 'UserCheck',
     title: 'Volwassenen Orthodontie',
     description:
-      'Het is nooit te laat voor een rechte lach. Wij behandelen dagelijks volwassenen — met een aanpak die past bij jouw leven en schema.',
+      'Het is nooit te laat voor een rechte lach. Meer dan 30% van onze patiënten is volwassen — zelfbetalend, bewust gekozen, en klaar voor een resultaat dat blijft.',
     priceFrom: '€2.800',
     duration: '12–30 maanden',
     targetAudience: 'Volwassenen 18+',
     faq: [
       {
-        q: 'Kan ik als volwassene een beugel krijgen?',
-        a: 'Absoluut. Meer dan 30% van onze patiënten is ouder dan 18.',
+        q: 'Welke behandeling past bij mijn situatie?',
+        a: 'Dat hangt af van uw tandstand en voorkeur. Transparante aligners zijn populair bij volwassenen: bijna onzichtbaar en uitneembaar. Een vaste beugel is effectiever bij complexere gevallen. We bepalen dit samen tijdens de gratis intake.',
       },
       {
-        q: 'Zijn er avondafspraken?',
-        a: 'Ja, wij bieden wekelijks avond- en zaterdagafspraken aan.',
+        q: 'Hoe lang duurt behandeling voor volwassenen?',
+        a: 'Gemiddeld 12 tot 18 maanden met aligners, 18 tot 30 maanden met een vaste beugel. U krijgt een persoonlijke tijdsindicatie tijdens het eerste consult.',
       },
     ],
   },
@@ -143,43 +147,73 @@ export const TESTIMONIALS = [
 
 export const FAQ_QUESTIONS = [
   {
+    question: 'Wat kost een orthodontische behandeling?',
+    answer:
+      'De kosten zijn afhankelijk van het type behandeling en de complexiteit van uw situatie. Als richtlijn: een vaste beugel begint vanaf €2.400, gedeeltelijke behandelingen (één kaak) liggen lager. Transparante aligners beginnen vanaf €3.200 voor een volledige behandeling. Voor een exacte prijsopgave is een intake nodig — deze is bij ons gratis en vrijblijvend. Gespreide betaling is mogelijk, zodat de kosten over de behandelperiode worden verdeeld.',
+  },
+  {
     question: 'Wordt een beugel vergoed door mijn zorgverzekeraar?',
     answer:
-      'Kinderen tot 18 jaar kunnen aanspraak maken op vergoeding vanuit de basisverzekering, mits er een orthodontische indicatie is. Volwassenen worden in de meeste gevallen niet vergoed via de basisverzekering, maar sommige aanvullende verzekeringen dekken een deel van de kosten. Wij controleren uw vergoedingsrecht gratis tijdens het eerste consult.',
+      'Kinderen en jongeren tot 18 jaar hebben recht op vergoeding vanuit de basisverzekering, mits de behandeling medisch noodzakelijk is en er een orthodontische indicatie bestaat. Belangrijk: de vergoeding geldt zolang de behandeling vóór het 18e jaar start. Wacht u te lang met aanmelden, dan kan uw kind de vergoeding mislopen. Volwassenen worden in de meeste gevallen niet vergoed via de basisverzekering. Sommige aanvullende verzekeringen vergoeden een deel — dit verschilt per verzekeraar en pakket. Wij controleren uw vergoedingsrecht gratis tijdens het eerste consult.',
   },
   {
     question: 'Kan ik als volwassene nog een beugel krijgen?',
     answer:
-      'Ja, absoluut. Er is geen leeftijdsgrens voor orthodontische behandeling. Meer dan 30% van onze patiënten is ouder dan 18 jaar. Zowel vaste beugels als transparante aligners zijn uitstekend geschikt voor volwassenen, en het resultaat is vergelijkbaar met behandelingen bij jongeren.',
+      'Ja, absoluut — er is geen leeftijdsgrens voor orthodontische behandeling. Meer dan 30% van onze patiënten is ouder dan 18 jaar. Volwassen patiënten kiezen vaak voor transparante aligners omdat deze nauwelijks zichtbaar zijn en passen bij een professionele uitstraling. Het resultaat van orthodontische behandeling is bij volwassenen even goed als bij jongeren, al kan de behandelduur iets langer zijn bij complexere gevallen.',
   },
   {
-    question: 'Hoe lang duurt een orthodontische behandeling?',
+    question: 'Ziet iemand dat ik een beugel draag?',
     answer:
-      'De behandelduur varieert per persoon en per type behandeling. Een gemiddelde vaste beugel bij jongeren duurt 18 tot 24 maanden. Transparante aligners voor volwassenen duren vaak 6 tot 18 maanden. Tijdens het kennismakingsgesprek geven wij een persoonlijke tijdsindicatie.',
+      'Dat hangt af van het type behandeling dat u kiest. Transparante aligners zoals Invisalign zijn in dagelijks gebruik nauwelijks zichtbaar — collega\'s en klanten merken vaak niets. Keramische brackets (tandkleurige brackets bij een vaste beugel) vallen minder op dan metalen brackets. Wilt u een zo onopvallend mogelijke behandeling? Geef dat aan bij uw intake, dan bekijken we samen welke optie het beste bij uw situatie past.',
+  },
+  {
+    question: 'Kan ik bij jullie terecht als ik tandartsangst heb?',
+    answer:
+      'Ja. Wij werken regelmatig met patiënten die spanning of angst ervaren rond tandheelkundige behandelingen. Ons team neemt de tijd om u rustig voor te bereiden op elke stap. U bent altijd welkom om vooraf vragen te stellen, en we stemmen het tempo van de behandeling af op wat voor u comfortabel voelt. Geef bij het plannen van uw afspraak aan dat u dit fijn vindt om te vermelden — dan houden wij hier rekening mee.',
   },
   {
     question: 'Wat is het verschil tussen Invisalign en een vaste beugel?',
     answer:
-      'Een vaste beugel bestaat uit brackets die aan de tanden zijn bevestigd en verbonden zijn met een draad. Invisalign (en vergelijkbare systemen) maakt gebruik van uitneembare doorzichtige trays. Aligners zijn bijna onzichtbaar en gemakkelijker te reinigen, maar vaste beugels zijn soms effectiever bij complexere tandstanden. Welke behandeling het beste bij u past, bespreken we tijdens het consult.',
+      'Een vaste beugel heeft brackets die permanent aan de tanden zijn bevestigd en verbonden zijn via een draad. Transparante aligners zoals Invisalign zijn uitneembare doorzichtige trays die u zelf in- en uitdoet. Aligners zijn vrijwel onzichtbaar, makkelijker schoon te houden en comfortabeler bij sporten. Vaste beugels zijn soms effectiever bij complexere tandstanden en vereisen minder eigen discipline. Welke behandeling het beste bij u past, bespreken we altijd op basis van uw gebit en uw wensen — niet op basis van wat duurder of goedkoper is.',
+  },
+  {
+    question: 'Hoe lang duurt een orthodontische behandeling?',
+    answer:
+      'De behandelduur hangt af van de complexiteit van uw tandstand en het type beugel. Een gemiddelde vaste beugel bij jongeren duurt 18 tot 24 maanden. Transparante aligners voor milde tot gemiddelde correcties duren vaak 6 tot 18 maanden. Na de actieve behandeling volgt een retentiefase met een retainer om het resultaat vast te houden. Tijdens het kennismakingsgesprek geven wij een persoonlijke tijdsindicatie op basis van uw situatie.',
   },
   {
     question: 'Doet een beugel pijn?',
     answer:
-      'De meeste patiënten ervaren de eerste 2 tot 4 dagen na het plaatsen of aanpassen van een beugel enige druk of spanning. Dit is normaal en trekt snel weg. Bij transparante aligners is het ongemak doorgaans minder. Ernstige pijn is niet normaal — neem dan contact met ons op.',
+      'De meeste patiënten ervaren de eerste 2 tot 4 dagen na het plaatsen of aanpassen van een beugel enige druk of spanning op de tanden. Dit is normaal en trekt vanzelf over. Ibuprofen of paracetamol helpt als het ongemak lastig is. Bij transparante aligners is het ongemak doorgaans minder uitgesproken. Ernstige of aanhoudende pijn is niet normaal — neem dan contact met ons op zodat we kunnen helpen.',
   },
   {
-    question: 'Wat kost een orthodontische behandeling?',
+    question: 'Wat gebeurt er na de behandeling? Blijven mijn tanden recht?',
     answer:
-      'De kosten hangen af van het type behandeling en de complexiteit van uw geval. Een vaste beugel begint vanaf €2.400, transparante aligners vanaf €3.200. Wij bieden altijd een gratis intake aan, waarbij u een exacte prijsopgave ontvangt. Gespreide betaling is mogelijk.',
+      'Na de actieve behandeling volgt een retentiefase. U krijgt een retainer — een dunne, onzichtbare beugel die u \'s nachts draagt — om te voorkomen dat tanden terugschuiven naar hun oude positie. Zonder retainer verschuiven tanden bij vrijwel iedereen geleidelijk terug. Wij begeleiden u ook in deze fase en geven duidelijke instructies over hoe lang en hoe vaak u de retainer moet dragen.',
   },
   {
     question: 'Hoe vaak moet ik op controle komen?',
     answer:
-      'Bij een vaste beugel plannen wij doorgaans om de 6 tot 8 weken een controlesessie. Bij aligners kom je minder frequent — gemiddeld eens per 8 tot 12 weken. Alle controleafspraken zijn inbegrepen in de behandelprijs.',
+      'Bij een vaste beugel plannen wij controlesessies om de 6 tot 8 weken. Tijdens deze afspraken wordt de beugel bijgesteld en de voortgang beoordeeld. Bij transparante aligners is de tussentijd langer — gemiddeld eens per 8 tot 12 weken. Alle controleafspraken zijn inbegrepen in de behandelprijs; u betaalt niet per bezoek.',
   },
   {
     question: 'Hebben jullie ook avond- of zaterdagafspraken?',
     answer:
-      'Ja. We begrijpen dat school en werk overdag lastig kunnen zijn. Wij bieden wekelijks avondafspraken (tot 19:00) en zaterdagse spreekuren aan. Geef uw voorkeur aan bij het inplannen van uw consult.',
+      'Ja. We begrijpen dat school en werk overdag lastig kunnen zijn. Wij bieden wekelijks avondafspraken aan tot 19:00 uur en zaterdagse spreekuren. Geef uw voorkeur aan bij het inplannen van uw consult, dan houden wij daar rekening mee.',
+  },
+  {
+    question: 'Hoe weet ik of mijn kind nu al naar de orthodontist moet?',
+    answer:
+      'Een eerste beoordeling is zinvol zodra de meeste blijvende tanden zijn doorgekomen, meestal tussen 10 en 13 jaar. Vroeg beginnen heeft voordelen: bij groeiende kaken zijn bepaalde correcties eenvoudiger en goedkoper. Bovendien geldt de zorgverzekeringsdekking alleen voor behandelingen die vóór het 18e jaar starten. Twijfelt u? Plan een vrijblijvend kennismaking — wij beoordelen of en wanneer behandeling nodig is.',
+  },
+  {
+    question: 'Hoe lang is de wachttijd voor een eerste afspraak?',
+    answer:
+      'Onze wachttijd voor een eerste kennismakingsgesprek is momenteel [X weken]. Voor een volledige behandelstart geldt een gemiddelde wachttijd van [Y maanden]. Wilt u niet te lang wachten? Plan uw intake zo vroeg mogelijk in — zeker als uw kind richting de 18 jaar gaat en vergoeding nog van toepassing is.',
+  },
+  {
+    question: 'Wat is een vrijblijvend kennismaking precies?',
+    answer:
+      'Tijdens het vrijblijvend kennismaking bekijken wij uw gebit en bespreken we uw wensen en verwachtingen. U ontvangt een eerste behandelindicatie, een indicatieve tijdsduur en een transparante prijsopgave. Er is geen verplichting om te starten. Het gesprek duurt ongeveer 30 minuten en is bedoeld om u alle informatie te geven die u nodig heeft om een weloverwogen beslissing te maken.',
   },
 ];

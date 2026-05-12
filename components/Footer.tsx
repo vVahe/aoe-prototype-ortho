@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 type FooterProps = {
   practice?: { name: string; phone: string; email?: string; address: string; website?: string };
-  hours?: { weekdayText: string[] };
 };
 
 function deriveEmail(practice?: FooterProps['practice']): string {
@@ -20,21 +19,11 @@ function deriveEmail(practice?: FooterProps['practice']): string {
   return PRACTICE_INFO.email;
 }
 
-function parseHoursRows(weekdayText: string[]): { day: string; hours: string }[] {
-  return weekdayText.map((line) => {
-    const idx = line.indexOf(':');
-    if (idx === -1) return { day: line, hours: '' };
-    return { day: line.slice(0, idx), hours: line.slice(idx + 1).trim() };
-  });
-}
-
-export default function Footer({ practice, hours }: FooterProps = {}) {
+export default function Footer({ practice }: FooterProps = {}) {
   const name    = practice?.name    ?? PRACTICE_INFO.name;
   const phone   = practice?.phone   ?? PRACTICE_INFO.phone;
   const email   = deriveEmail(practice);
   const address = practice?.address ?? PRACTICE_INFO.address;
-  const weekdayText = hours?.weekdayText ?? [];
-  const hoursRows = parseHoursRows(weekdayText);
 
   return (
     <footer className="bg-primary text-white">
@@ -108,22 +97,6 @@ export default function Footer({ practice, hours }: FooterProps = {}) {
               </li>
             </ul>
 
-            {/* Opening hours */}
-            {hoursRows.length > 0 && (
-              <div className="mt-6">
-                <h3 className="font-heading mb-3 text-lg font-semibold">Openingstijden</h3>
-                <table className="w-full text-sm text-white/80">
-                  <tbody>
-                    {hoursRows.map(({ day, hours: h }) => (
-                      <tr key={day}>
-                        <td className="py-0.5 pr-4 font-medium">{day}</td>
-                        <td className="py-0.5 text-white/60">{h || 'Gesloten'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
           </div>
 
           {/* Behandelingen */}
@@ -147,7 +120,6 @@ export default function Footer({ practice, hours }: FooterProps = {}) {
             <h3 className="font-heading mb-4 text-lg font-semibold">Informatie</h3>
             <ul className="space-y-2 text-sm text-white/80">
               {[
-                'ANO-lidmaatschap',
                 'Vergoedingen & Verzekeringen',
                 'Privacy Policy',
                 'Contact',

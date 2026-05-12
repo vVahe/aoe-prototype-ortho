@@ -57,7 +57,7 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
         <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-surface p-6 shadow-xl focus:outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 md:p-8 max-h-[90vh] overflow-y-auto">
           <div className="mb-6 flex items-start justify-between">
             <Dialog.Title className="font-heading text-2xl font-bold text-primary">
-              Plan uw gratis kennismaking
+              Plan uw vrijblijvend kennismaking
             </Dialog.Title>
             <Dialog.Close
               onClick={handleClose}
@@ -160,6 +160,10 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
                   ))}
                 </select>
               </div>
+
+              <p className="text-center text-xs text-muted italic">
+                Deze pagina is een demo — het formulier is nog niet live.
+              </p>
 
               <button
                 type="submit"

@@ -73,6 +73,106 @@ interface PlaceResult {
   }[];
 }
 
+// ── Nearby search ─────────────────────────────────────────────────────────────
+
+interface NearbyPlace {
+  displayName?: { text: string };
+  location?: { latitude: number; longitude: number };
+}
+
+function haversineMeters(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 6_371_000;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+async function fetchNearby(
+  lat: number,
+  lng: number,
+  types: string[],
+  radiusMeters: number,
+  max = 1,
+): Promise<NearbyPlace[]> {
+  try {
+    const res = await fetch('https://places.googleapis.com/v1/places:searchNearby', {
+      method: 'POST',
+      headers: {
+        'X-Goog-Api-Key': API_KEY!,
+        'X-Goog-FieldMask': 'places.displayName,places.location',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        includedTypes: types,
+        maxResultCount: max,
+        locationRestriction: {
+          circle: { center: { latitude: lat, longitude: lng }, radius: radiusMeters },
+        },
+      }),
+    });
+    if (!res.ok) return [];
+    const data = (await res.json()) as { places?: NearbyPlace[] };
+    return data.places ?? [];
+  } catch {
+    return [];
+  }
+}
+
+async function buildTransportInfo(
+  lat: number,
+  lng: number,
+  prev: { parking?: unknown; publicTransport?: unknown; bike?: unknown },
+): Promise<{ parking?: string; publicTransport?: string; bike?: string }> {
+  const [parkingPlaces, transitPlaces, trainPlaces] = await Promise.all([
+    prev.parking   ? [] : fetchNearby(lat, lng, ['parking'], 500),
+    prev.publicTransport ? [] : fetchNearby(lat, lng, ['bus_station', 'subway_station', 'light_rail_station'], 500),
+    prev.bike      ? [] : fetchNearby(lat, lng, ['train_station', 'light_rail_station'], 3000),
+  ]);
+
+  const walkMin = (p: NearbyPlace) =>
+    p.location ? Math.max(1, Math.round(haversineMeters(lat, lng, p.location.latitude, p.location.longitude) / 80)) : null;
+  const bikeMin = (p: NearbyPlace) =>
+    p.location ? Math.max(1, Math.round(haversineMeters(lat, lng, p.location.latitude, p.location.longitude) / 250)) : null;
+
+  const result: { parking?: string; publicTransport?: string; bike?: string } = {
+    parking:         prev.parking         as string | undefined,
+    publicTransport: prev.publicTransport as string | undefined,
+    bike:            prev.bike            as string | undefined,
+  };
+
+  if (!result.parking && parkingPlaces[0]) {
+    const p = parkingPlaces[0];
+    const name = p.displayName?.text ?? 'Parkeerplaats';
+    const min = walkMin(p);
+    result.parking = min
+      ? `Parkeren mogelijk — ${min} min lopen naar ${name}`
+      : `Parkeren bij ${name}`;
+  }
+  if (!result.publicTransport && transitPlaces[0]) {
+    const p = transitPlaces[0];
+    const name = p.displayName?.text ?? 'Bushalte';
+    const min = walkMin(p);
+    result.publicTransport = min ? `${min} min lopen van ${name}` : `Bereikbaar via ${name}`;
+  }
+  if (!result.bike && trainPlaces[0]) {
+    const p = trainPlaces[0];
+    const rawName = p.displayName?.text ?? 'het station';
+    // Google Places often returns just the city name for train stations; always prefix with "Station"
+    // unless the name already contains a station-related word.
+    const stationName = /station|centraal|central/i.test(rawName) ? rawName : `Station ${rawName}`;
+    const min = bikeMin(p);
+    result.bike = min
+      ? `${min} min fietsen van ${stationName}`
+      : `Bereikbaar per fiets via ${stationName}`;
+  }
+
+  return result;
+}
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 const FIELD_MASK = [
@@ -187,6 +287,11 @@ async function main() {
         photos.push(`/images/prospects/${slug}/${filename}`);
       }
 
+      const prevLocation = (prev?.location as Record<string, unknown> | undefined) ?? {};
+      const transport = place.location
+        ? await buildTransportInfo(place.location.latitude, place.location.longitude, prevLocation)
+        : { parking: prevLocation.parking as string | undefined, publicTransport: prevLocation.publicTransport as string | undefined, bike: prevLocation.bike as string | undefined };
+
       results.push({
         slug,
         practice: {
@@ -226,8 +331,7 @@ async function main() {
         location: {
           lat: place.location?.latitude,
           lng: place.location?.longitude,
-          parking:         (prev?.location as Record<string, unknown> | undefined)?.parking,
-          publicTransport: (prev?.location as Record<string, unknown> | undefined)?.publicTransport,
+          ...transport,
         },
         outreach: prev?.outreach ?? {
           operatorName: '',

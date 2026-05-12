@@ -64,6 +64,7 @@ export type LocationInfo = {
   lng?: number;
   parking?: string;
   publicTransport?: string;
+  bike?: string;
 };
 
 export type OutreachInfo = {
@@ -93,7 +94,7 @@ export type ProspectView = {
   doctor: { name: string; salutation: string };
   reviews: { rating: number; count: number; items: ReviewItem[] };
   hours: { weekdayText: string[] };
-  location: { parking: string; publicTransport: string };
+  location: { parking: string; publicTransport: string; bike: string };
   outreach: OutreachInfo;
 };
 
@@ -113,10 +114,6 @@ function loadProspects(): Prospect[] {
 const prospects = loadProspects();
 
 // ── Accessors ──────────────────────────────────────────────────────────────────
-
-export function getAllProspects(): Prospect[] {
-  return prospects;
-}
 
 export function getProspectBySlug(slug: string): Prospect | null {
   return prospects.find((p) => p.slug === slug) ?? null;
@@ -161,6 +158,7 @@ export function getProspectView(prospect: Prospect): ProspectView {
     location: {
       parking: location?.parking ?? '',
       publicTransport: location?.publicTransport ?? '',
+      bike: location?.bike ?? '',
     },
     outreach,
   };

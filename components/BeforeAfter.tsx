@@ -40,9 +40,9 @@ export default function BeforeAfter() {
     <section id="resultaten" className="bg-white py-16">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="font-heading mb-2 text-3xl font-bold text-primary md:text-4xl">
-          Wat onze patiënten bereikten
+          Zo ziet een behandelresultaat eruit — van start tot retainer
         </h2>
-        <p className="mb-10 text-muted">Echte behandelingen, echte resultaten.</p>
+        <p className="mb-10 text-muted">Een voorbeeld van het traject: behandeltype, looptijd en eindresultaat.</p>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {BEFORE_AFTER_CASES.map((c) => (
             <CaseCard key={c.id} c={c} />

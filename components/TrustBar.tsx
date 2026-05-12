@@ -1,5 +1,4 @@
 import { Users, Clock, Shield, GraduationCap, BadgeCheck } from 'lucide-react';
-import { PRACTICE_INFO } from '@/lib/constants';
 
 type Block = { kind: 'stat'; value: string; label: string; icon: React.ElementType };
 
@@ -25,14 +24,14 @@ const blocks: Block[] = [
   {
     kind: 'stat',
     icon: Users,
-    value: PRACTICE_INFO.trustSignals.patients,
-    label: 'behandelde patiënten',
+    value: 'Honderden',
+    label: 'tevreden patiënten',
   },
   {
     kind: 'stat',
     icon: Clock,
-    value: PRACTICE_INFO.trustSignals.experience,
-    label: 'gespecialiseerde orthodontie',
+    value: 'Jaren',
+    label: 'orthodontische ervaring',
   },
 ];
 

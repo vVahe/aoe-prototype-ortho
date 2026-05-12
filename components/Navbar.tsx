@@ -4,8 +4,8 @@ const navLinks = [
   { label: 'Home', href: '#home' },
   { label: 'Behandelingen', href: '#behandelingen' },
   { label: 'Resultaten', href: '#resultaten' },
-  { label: 'Over ons', href: '#over-ons' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'Recensies', href: '#recensies' },
   { label: 'Contact', href: '#contact' },
 ];
 

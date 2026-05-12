@@ -1,14 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Braces, Layers, UserCheck, ChevronDown } from 'lucide-react';
+import Image from 'next/image';
+import { ChevronDown } from 'lucide-react';
 import { TREATMENTS } from '@/lib/constants';
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Braces,
-  Layers,
-  UserCheck,
-};
 
 interface TreatmentCardProps {
   treatment: (typeof TREATMENTS)[number];
@@ -17,40 +12,53 @@ interface TreatmentCardProps {
 
 function TreatmentCardItem({ treatment, onOpenBooking }: TreatmentCardProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const Icon = iconMap[treatment.icon];
 
   return (
-    <div className="flex flex-col rounded-xl border-l-4 border-primary bg-surface p-6 shadow-sm transition-shadow hover:shadow-md">
-      <div className="mb-4 flex items-center gap-3">
-        {Icon && <Icon className="h-7 w-7 text-primary" />}
-        <h3 className="font-heading text-xl font-semibold text-primary">
+    <div className="flex flex-col rounded-xl border-l-4 border-primary bg-surface shadow-sm transition-shadow hover:shadow-md overflow-hidden">
+      <div className="relative h-48 w-full">
+        <Image
+          src={`/images/treatments/${treatment.id}.jpg`}
+          alt={treatment.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+      </div>
+      <div className="p-6 flex flex-col flex-1">
+        <div className="mb-4 flex flex-1 flex-col">
+        <h3 className="mb-3 font-heading text-xl font-semibold text-primary">
           {treatment.title}
         </h3>
+
+        <p className="text-sm leading-relaxed text-neutral">
+          {treatment.description}
+        </p>
       </div>
 
-      <p className="mb-4 text-sm leading-relaxed text-neutral">
-        {treatment.description}
-      </p>
-
-      <div className="mb-4 flex items-center justify-between">
-        <div>
-          <span className="text-xs text-muted">Vanaf</span>
-          <p className="font-heading text-2xl font-bold text-primary">
-            {treatment.priceFrom}
-          </p>
+      <div className="mb-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <span className="text-xs text-muted">Vanaf</span>
+            <p className="font-heading text-2xl font-bold text-primary">
+              {treatment.priceFrom}
+            </p>
+          </div>
+          <div className="text-right">
+            <span className="text-xs text-muted">Behandelduur</span>
+            <p className="text-sm font-medium text-neutral">{treatment.duration}</p>
+          </div>
         </div>
-        <div className="text-right">
-          <span className="text-xs text-muted">Behandelduur</span>
-          <p className="text-sm font-medium text-neutral">{treatment.duration}</p>
-        </div>
+        <p className="mt-2 text-xs leading-snug text-accent">
+          {('insuranceNote' in treatment && treatment.insuranceNote) || ' '}
+        </p>
       </div>
 
       <div className="mb-6 space-y-2">
         {treatment.faq.map((item, i) => (
-          <div key={i} className="rounded-lg border border-border overflow-hidden">
+          <div key={i} className="relative rounded-lg border border-border">
             <button
               onClick={() => setOpenFaq(openFaq === i ? null : i)}
-              className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold text-neutral hover:bg-secondary transition-colors"
+              className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold text-neutral hover:bg-secondary transition-colors rounded-lg"
             >
               {item.q}
               <ChevronDown
@@ -60,7 +68,7 @@ function TreatmentCardItem({ treatment, onOpenBooking }: TreatmentCardProps) {
               />
             </button>
             {openFaq === i && (
-              <div className="bg-secondary px-4 py-3 text-sm leading-relaxed text-neutral">
+              <div className="absolute left-0 right-0 top-full z-20 rounded-b-lg border border-t-0 border-border bg-secondary px-4 py-3 text-sm leading-relaxed text-neutral shadow-md">
                 {item.a}
               </div>
             )}
@@ -74,6 +82,7 @@ function TreatmentCardItem({ treatment, onOpenBooking }: TreatmentCardProps) {
       >
         Gratis consult aanvragen
       </button>
+      </div>
     </div>
   );
 }
@@ -90,7 +99,7 @@ export default function TreatmentCards({ onOpenBooking }: TreatmentCardsProps) {
           Onze behandelingen
         </h2>
         <p className="mb-10 text-muted">
-          Voor kinderen, tieners én volwassenen — met transparante prijzen.
+          Voor kinderen, tieners én volwassenen — vaste beugel, Invisalign, of transparante aligner.
         </p>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {TREATMENTS.map((treatment) => (
