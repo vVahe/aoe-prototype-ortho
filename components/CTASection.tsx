@@ -15,10 +15,10 @@ export default function CTASection({ onOpen }: CTASectionProps) {
           onClick={onOpen}
           className="mb-4 rounded-full bg-accent px-8 py-4 text-lg font-semibold text-white shadow-md transition-all hover:scale-105 hover:brightness-90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50"
         >
-          Plan een vrijblijvend kennismaking
+          Plan een vrijblijvende kennismaking
         </button>
         <p className="text-sm text-white/70">
-          Geen verplichtingen · Antwoord binnen 24 uur · Ook avond- en zaterdagafspraken
+          Geen verplichtingen · Antwoord binnen 24 uur
         </p>
       </div>
     </section>

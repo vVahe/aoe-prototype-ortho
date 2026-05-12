@@ -36,7 +36,7 @@ export default function Hero({ onOpenBooking, practice }: HeroProps) {
               onClick={onOpenBooking}
               className="rounded-full bg-accent px-8 py-4 text-base font-semibold text-white shadow-md transition-all hover:scale-105 hover:brightness-90 focus:outline-none focus:ring-4 focus:ring-accent/30"
             >
-              Plan een vrijblijvend kennismaking
+              Plan een vrijblijvende kennismaking
             </button>
             <p className="mt-3 text-sm text-muted">
               Geen wachtlijst · Geen verplichtingen · Antwoord binnen 24 uur
@@ -73,10 +73,10 @@ export default function Hero({ onOpenBooking, practice }: HeroProps) {
         </span>
         <button
           onClick={onOpenBooking}
-          aria-label="Plan een vrijblijvend kennismaking"
+          aria-label="Plan een vrijblijvende kennismaking"
           className="shrink-0 rounded-full bg-white px-4 py-2 text-sm font-bold text-accent transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
-          Vrijblijvend gesprek
+          vrijblijvende gesprek
         </button>
       </div>
     </section>

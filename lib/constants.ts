@@ -149,7 +149,7 @@ export const FAQ_QUESTIONS = [
   {
     question: 'Wat kost een orthodontische behandeling?',
     answer:
-      'De kosten zijn afhankelijk van het type behandeling en de complexiteit van uw situatie. Als richtlijn: een vaste beugel begint vanaf €2.400, gedeeltelijke behandelingen (één kaak) liggen lager. Transparante aligners beginnen vanaf €3.200 voor een volledige behandeling. Voor een exacte prijsopgave is een intake nodig — deze is bij ons gratis en vrijblijvend. Gespreide betaling is mogelijk, zodat de kosten over de behandelperiode worden verdeeld.',
+      'De kosten zijn afhankelijk van het type behandeling en de complexiteit van uw situatie. Als richtlijn: een vaste beugel begint vanaf €2.400, gedeeltelijke behandelingen (één kaak) liggen lager. Transparante aligners beginnen vanaf €3.200 voor een volledige behandeling. Voor een exacte prijsopgave is een intake nodig — deze is bij ons gratis en vrijblijvende. Gespreide betaling is mogelijk, zodat de kosten over de behandelperiode worden verdeeld.',
   },
   {
     question: 'Wordt een beugel vergoed door mijn zorgverzekeraar?',
@@ -197,14 +197,9 @@ export const FAQ_QUESTIONS = [
       'Bij een vaste beugel plannen wij controlesessies om de 6 tot 8 weken. Tijdens deze afspraken wordt de beugel bijgesteld en de voortgang beoordeeld. Bij transparante aligners is de tussentijd langer — gemiddeld eens per 8 tot 12 weken. Alle controleafspraken zijn inbegrepen in de behandelprijs; u betaalt niet per bezoek.',
   },
   {
-    question: 'Hebben jullie ook avond- of zaterdagafspraken?',
-    answer:
-      'Ja. We begrijpen dat school en werk overdag lastig kunnen zijn. Wij bieden wekelijks avondafspraken aan tot 19:00 uur en zaterdagse spreekuren. Geef uw voorkeur aan bij het inplannen van uw consult, dan houden wij daar rekening mee.',
-  },
-  {
     question: 'Hoe weet ik of mijn kind nu al naar de orthodontist moet?',
     answer:
-      'Een eerste beoordeling is zinvol zodra de meeste blijvende tanden zijn doorgekomen, meestal tussen 10 en 13 jaar. Vroeg beginnen heeft voordelen: bij groeiende kaken zijn bepaalde correcties eenvoudiger en goedkoper. Bovendien geldt de zorgverzekeringsdekking alleen voor behandelingen die vóór het 18e jaar starten. Twijfelt u? Plan een vrijblijvend kennismaking — wij beoordelen of en wanneer behandeling nodig is.',
+      'Een eerste beoordeling is zinvol zodra de meeste blijvende tanden zijn doorgekomen, meestal tussen 10 en 13 jaar. Vroeg beginnen heeft voordelen: bij groeiende kaken zijn bepaalde correcties eenvoudiger en goedkoper. Bovendien geldt de zorgverzekeringsdekking alleen voor behandelingen die vóór het 18e jaar starten. Twijfelt u? Plan een vrijblijvende kennismaking — wij beoordelen of en wanneer behandeling nodig is.',
   },
   {
     question: 'Hoe lang is de wachttijd voor een eerste afspraak?',
@@ -212,8 +207,8 @@ export const FAQ_QUESTIONS = [
       'Onze wachttijd voor een eerste kennismakingsgesprek is momenteel [X weken]. Voor een volledige behandelstart geldt een gemiddelde wachttijd van [Y maanden]. Wilt u niet te lang wachten? Plan uw intake zo vroeg mogelijk in — zeker als uw kind richting de 18 jaar gaat en vergoeding nog van toepassing is.',
   },
   {
-    question: 'Wat is een vrijblijvend kennismaking precies?',
+    question: 'Wat is een vrijblijvende kennismaking precies?',
     answer:
-      'Tijdens het vrijblijvend kennismaking bekijken wij uw gebit en bespreken we uw wensen en verwachtingen. U ontvangt een eerste behandelindicatie, een indicatieve tijdsduur en een transparante prijsopgave. Er is geen verplichting om te starten. Het gesprek duurt ongeveer 30 minuten en is bedoeld om u alle informatie te geven die u nodig heeft om een weloverwogen beslissing te maken.',
+      'Tijdens het vrijblijvende kennismaking bekijken wij uw gebit en bespreken we uw wensen en verwachtingen. U ontvangt een eerste behandelindicatie, een indicatieve tijdsduur en een transparante prijsopgave. Er is geen verplichting om te starten. Het gesprek duurt ongeveer 30 minuten en is bedoeld om u alle informatie te geven die u nodig heeft om een weloverwogen beslissing te maken.',
   },
 ];

@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
@@ -64,6 +65,20 @@ interface PlaceResult {
   businessStatus?: string;
   primaryTypeDisplayName?: { text: string; languageCode: string };
   location?: { latitude: number; longitude: number };
+  restroom?: boolean;
+  parkingOptions?: {
+    freeParkingLot?: boolean;
+    paidParkingLot?: boolean;
+    freeStreetParking?: boolean;
+    paidStreetParking?: boolean;
+    valetParking?: boolean;
+  };
+  accessibilityOptions?: {
+    wheelchairAccessibleParking?: boolean;
+    wheelchairAccessibleEntrance?: boolean;
+    wheelchairAccessibleRestroom?: boolean;
+    wheelchairAccessibleSeating?: boolean;
+  };
   reviews?: {
     name: string;
     rating: number;
@@ -193,6 +208,9 @@ const FIELD_MASK = [
   'primaryTypeDisplayName',
   'location',
   'reviews',
+  'restroom',
+  'parkingOptions',
+  'accessibilityOptions',
 ].join(',');
 
 async function fetchPlaceDetails(placeId: string): Promise<PlaceResult> {
@@ -206,9 +224,13 @@ async function fetchPlaceDetails(placeId: string): Promise<PlaceResult> {
   return res.json() as Promise<PlaceResult>;
 }
 
+function fileHash(filePath: string): string {
+  return crypto.createHash('md5').update(fs.readFileSync(filePath)).digest('hex');
+}
+
 async function downloadPhoto(photoName: string, destPath: string): Promise<void> {
   if (fs.existsSync(destPath)) return;
-  const url = `https://places.googleapis.com/v1/${photoName}/media?maxWidthPx=1600&key=${API_KEY}`;
+  const url = `https://places.googleapis.com/v1/${photoName}/media?maxWidthPx=4800&key=${API_KEY}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Photo fetch ${res.status}`);
   const buf = Buffer.from(await res.arrayBuffer());
@@ -274,16 +296,24 @@ async function main() {
 
       // Filter to landscape photos (width/height >= 1.2) to favour professional/owner shots,
       // then sort by pixel area descending so highest-quality images come first.
+      const ownerName = place.displayName?.text ?? '';
       const candidatePhotos = (place.photos ?? [])
-        .filter(p => p.widthPx / p.heightPx >= 1.2)
+        .filter(p => p.authorAttributions?.[0]?.displayName === ownerName)
         .sort((a, b) => (b.widthPx * b.heightPx) - (a.widthPx * a.heightPx))
-        .slice(0, 5);
+        .slice(0, 10);
 
       const photos: string[] = [];
+      const seenHashes = new Set<string>();
       for (const photo of candidatePhotos) {
         const filename = `${photos.length + 1}.webp`;
         const destPath = path.join(PHOTOS_BASE, slug, filename);
         await downloadPhoto(photo.name, destPath);
+        const hash = fileHash(destPath);
+        if (seenHashes.has(hash)) {
+          fs.unlinkSync(destPath);
+          continue;
+        }
+        seenHashes.add(hash);
         photos.push(`/images/prospects/${slug}/${filename}`);
       }
 
@@ -332,6 +362,9 @@ async function main() {
           lat: place.location?.latitude,
           lng: place.location?.longitude,
           ...transport,
+          ...(place.restroom !== undefined && { restroom: place.restroom }),
+          ...(place.parkingOptions && { parkingOptions: place.parkingOptions }),
+          ...(place.accessibilityOptions && { accessibilityOptions: place.accessibilityOptions }),
         },
         outreach: prev?.outreach ?? {
           operatorName: '',

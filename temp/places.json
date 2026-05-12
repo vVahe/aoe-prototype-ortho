@@ -1,0 +1,711 @@
+{
+    "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI",
+    "id": "ChIJ72-2Bl7ZxkcRe6CTnNk3rAI",
+    "types": [
+        "dentist",
+        "health",
+        "point_of_interest",
+        "establishment"
+    ],
+    "nationalPhoneNumber": "040 209 3121",
+    "internationalPhoneNumber": "+31 40 209 3121",
+    "formattedAddress": "Botenlaan 82, 5652 CB Eindhoven, Nederland",
+    "addressComponents": [
+        {
+            "longText": "82",
+            "shortText": "82",
+            "types": [
+                "street_number"
+            ],
+            "languageCode": "nl"
+        },
+        {
+            "longText": "Botenlaan",
+            "shortText": "Botenlaan",
+            "types": [
+                "route"
+            ],
+            "languageCode": "nl"
+        },
+        {
+            "longText": "Strijp",
+            "shortText": "Strijp",
+            "types": [
+                "sublocality_level_1",
+                "sublocality",
+                "political"
+            ],
+            "languageCode": "nl"
+        },
+        {
+            "longText": "Eindhoven",
+            "shortText": "Eindhoven",
+            "types": [
+                "locality",
+                "political"
+            ],
+            "languageCode": "nl"
+        },
+        {
+            "longText": "Eindhoven",
+            "shortText": "Eindhoven",
+            "types": [
+                "administrative_area_level_2",
+                "political"
+            ],
+            "languageCode": "nl"
+        },
+        {
+            "longText": "Noord-Brabant",
+            "shortText": "NB",
+            "types": [
+                "administrative_area_level_1",
+                "political"
+            ],
+            "languageCode": "nl"
+        },
+        {
+            "longText": "Nederland",
+            "shortText": "NL",
+            "types": [
+                "country",
+                "political"
+            ],
+            "languageCode": "nl"
+        },
+        {
+            "longText": "5652 CB",
+            "shortText": "5652 CB",
+            "types": [
+                "postal_code"
+            ],
+            "languageCode": "nl"
+        }
+    ],
+    "plusCode": {
+        "globalCode": "9F37CFP2+FJ",
+        "compoundCode": "CFP2+FJ Eindhoven, Nederland"
+    },
+    "location": {
+        "latitude": 51.4361864,
+        "longitude": 5.4515281
+    },
+    "viewport": {
+        "low": {
+            "latitude": 51.434759319708505,
+            "longitude": 5.450152319708498
+        },
+        "high": {
+            "latitude": 51.437457280291504,
+            "longitude": 5.4528502802915026
+        }
+    },
+    "rating": 5,
+    "googleMapsUri": "https://maps.google.com/?cid=192590291844440187&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+    "websiteUri": "https://strijpm.nl/",
+    "regularOpeningHours": {
+        "openNow": false,
+        "periods": [
+            {
+                "open": {
+                    "day": 1,
+                    "hour": 8,
+                    "minute": 15
+                },
+                "close": {
+                    "day": 1,
+                    "hour": 16,
+                    "minute": 45
+                }
+            },
+            {
+                "open": {
+                    "day": 2,
+                    "hour": 8,
+                    "minute": 15
+                },
+                "close": {
+                    "day": 2,
+                    "hour": 16,
+                    "minute": 45
+                }
+            },
+            {
+                "open": {
+                    "day": 3,
+                    "hour": 8,
+                    "minute": 15
+                },
+                "close": {
+                    "day": 3,
+                    "hour": 16,
+                    "minute": 45
+                }
+            },
+            {
+                "open": {
+                    "day": 4,
+                    "hour": 8,
+                    "minute": 15
+                },
+                "close": {
+                    "day": 4,
+                    "hour": 16,
+                    "minute": 45
+                }
+            },
+            {
+                "open": {
+                    "day": 5,
+                    "hour": 8,
+                    "minute": 15
+                },
+                "close": {
+                    "day": 5,
+                    "hour": 16,
+                    "minute": 45
+                }
+            }
+        ],
+        "weekdayDescriptions": [
+            "maandag: 08:15–16:45",
+            "dinsdag: 08:15–16:45",
+            "woensdag: 08:15–16:45",
+            "donderdag: 08:15–16:45",
+            "vrijdag: 08:15–16:45",
+            "zaterdag: Gesloten",
+            "zondag: Gesloten"
+        ],
+        "nextOpenTime": "2026-05-13T06:15:00Z"
+    },
+    "utcOffsetMinutes": 120,
+    "adrFormatAddress": "<span class=\"street-address\">Botenlaan 82</span>, <span class=\"postal-code\">5652 CB</span> <span class=\"locality\">Eindhoven</span>, <span class=\"country-name\">Nederland</span>",
+    "businessStatus": "OPERATIONAL",
+    "userRatingCount": 87,
+    "iconMaskBaseUri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+    "iconBackgroundColor": "#7B9EB0",
+    "displayName": {
+        "text": "Strijp Mondzorg🦷",
+        "languageCode": "nl"
+    },
+    "primaryTypeDisplayName": {
+        "text": "Tandarts",
+        "languageCode": "nl"
+    },
+    "currentOpeningHours": {
+        "openNow": false,
+        "periods": [
+            {
+                "open": {
+                    "day": 1,
+                    "hour": 8,
+                    "minute": 15,
+                    "date": {
+                        "year": 2026,
+                        "month": 5,
+                        "day": 18
+                    }
+                },
+                "close": {
+                    "day": 1,
+                    "hour": 16,
+                    "minute": 45,
+                    "date": {
+                        "year": 2026,
+                        "month": 5,
+                        "day": 18
+                    }
+                }
+            },
+            {
+                "open": {
+                    "day": 2,
+                    "hour": 8,
+                    "minute": 15,
+                    "date": {
+                        "year": 2026,
+                        "month": 5,
+                        "day": 12
+                    }
+                },
+                "close": {
+                    "day": 2,
+                    "hour": 16,
+                    "minute": 45,
+                    "date": {
+                        "year": 2026,
+                        "month": 5,
+                        "day": 12
+                    }
+                }
+            },
+            {
+                "open": {
+                    "day": 3,
+                    "hour": 8,
+                    "minute": 15,
+                    "date": {
+                        "year": 2026,
+                        "month": 5,
+                        "day": 13
+                    }
+                },
+                "close": {
+                    "day": 3,
+                    "hour": 16,
+                    "minute": 45,
+                    "date": {
+                        "year": 2026,
+                        "month": 5,
+                        "day": 13
+                    }
+                }
+            },
+            {
+                "open": {
+                    "day": 5,
+                    "hour": 8,
+                    "minute": 15,
+                    "date": {
+                        "year": 2026,
+                        "month": 5,
+                        "day": 15
+                    }
+                },
+                "close": {
+                    "day": 5,
+                    "hour": 16,
+                    "minute": 45,
+                    "date": {
+                        "year": 2026,
+                        "month": 5,
+                        "day": 15
+                    }
+                }
+            }
+        ],
+        "weekdayDescriptions": [
+            "maandag: 08:15–16:45",
+            "dinsdag: 08:15–16:45",
+            "woensdag: 08:15–16:45",
+            "donderdag: Gesloten",
+            "vrijdag: 08:15–16:45",
+            "zaterdag: Gesloten",
+            "zondag: Gesloten"
+        ],
+        "specialDays": [
+            {
+                "date": {
+                    "year": 2026,
+                    "month": 5,
+                    "day": 14
+                }
+            }
+        ],
+        "nextOpenTime": "2026-05-13T06:15:00Z"
+    },
+    "primaryType": "dentist",
+    "shortFormattedAddress": "Botenlaan 82, Eindhoven",
+    "reviews": [
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/reviews/Ci9DQUlRQUNvZENodHljRjlvT21kak9GVmpNWEZ2TTBneldsRlJXR05RZVVSaFpIYxAB",
+            "relativePublishTimeDescription": "5 maanden geleden",
+            "rating": 1,
+            "text": {
+                "text": "Ik kwam hierheen door alle goede reviews, maar mijn ervaring was helaas anders.\n\nVanaf mijn eerste afspraak voelde ik me niet op mijn gemak. Ik voelde me beoordeeld toen ik vertelde dat ik een tijd niet naar de tandarts was geweest. Toen ik vragen stelde (ook gewoon of een bepaalde tijd mogelijk was) merkte ik dat dit niet gewaardeerd werd door de assistente. De houding voelde afstandelijk en ongewenst, alsof mijn aanwezigheid en vragen eigenlijk te veel waren.\n\nOok later, wanneer ik weer voor een afspraak binnenkwam, zag ik de assistentes naar elkaar kijken en elkaar aantikken. Dat gaf me het gevoel dat er over mij werd gepraat, wat gewoon vervelend is als je als patiënt probeert vertrouwen te hebben in een praktijk.\n\nToen ik vandaag belde voor een nieuwe afspraak, kon het ineens pas volgend jaar, voor het vullen van 1 gaatje? Dat voelde opnieuw niet prettig. Toen hierna ik aangaf dat ik me wilde uitschrijven omdat ik aangaf ik geen fijne ervaring heb bij de praktijk (en omdat ik verhuisd ben) viel de assistende enorm uit tegen mij aan de telefoon.\n\nDe behandeling door de tandarts zelf was wel in orde, mij probleem lag hem meer bij de balie. Al met al was het geen fijne ervaring voor mij, en daarom stap ik over naar een andere praktijk.",
+                "languageCode": "nl"
+            },
+            "originalText": {
+                "text": "Ik kwam hierheen door alle goede reviews, maar mijn ervaring was helaas anders.\n\nVanaf mijn eerste afspraak voelde ik me niet op mijn gemak. Ik voelde me beoordeeld toen ik vertelde dat ik een tijd niet naar de tandarts was geweest. Toen ik vragen stelde (ook gewoon of een bepaalde tijd mogelijk was) merkte ik dat dit niet gewaardeerd werd door de assistente. De houding voelde afstandelijk en ongewenst, alsof mijn aanwezigheid en vragen eigenlijk te veel waren.\n\nOok later, wanneer ik weer voor een afspraak binnenkwam, zag ik de assistentes naar elkaar kijken en elkaar aantikken. Dat gaf me het gevoel dat er over mij werd gepraat, wat gewoon vervelend is als je als patiënt probeert vertrouwen te hebben in een praktijk.\n\nToen ik vandaag belde voor een nieuwe afspraak, kon het ineens pas volgend jaar, voor het vullen van 1 gaatje? Dat voelde opnieuw niet prettig. Toen hierna ik aangaf dat ik me wilde uitschrijven omdat ik aangaf ik geen fijne ervaring heb bij de praktijk (en omdat ik verhuisd ben) viel de assistende enorm uit tegen mij aan de telefoon.\n\nDe behandeling door de tandarts zelf was wel in orde, mij probleem lag hem meer bij de balie. Al met al was het geen fijne ervaring voor mij, en daarom stap ik over naar een andere praktijk.",
+                "languageCode": "nl"
+            },
+            "authorAttribution": {
+                "displayName": "Estée Celéste",
+                "uri": "https://www.google.com/maps/contrib/108815745724570791925/reviews",
+                "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWOefTEzBtKg2Mssx3tiKUdke-md-Eso7iynhXUActzcAmGwcGW_A=s128-c0x00000000-cc-rp-mo-ba3"
+            },
+            "publishTime": "2025-12-09T16:18:52.176973989Z",
+            "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT21kak9GVmpNWEZ2TTBneldsRlJXR05RZVVSaFpIYxAB&d=17924085&t=1",
+            "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21kak9GVmpNWEZ2TTBneldsRlJXR05RZVVSaFpIYxAB!2m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/reviews/Ci9DQUlRQUNvZENodHljRjlvT2pOSmFtbHdkbHBJY25reGNYSTJkamxWTWpsbVIyYxAB",
+            "relativePublishTimeDescription": "4 maanden geleden",
+            "rating": 5,
+            "text": {
+                "text": "Gisteren heb ik gebruikgemaakt van de diensten van Strijp Mondzorg en ik ben zeer tevreden.\nDe tandreiniging werd uitgevoerd door mondhygiëniste B. Tarhan. De behandeling was volledig pijnloos en zeer professioneel uitgevoerd.\n\nMevrouw Tarhan werkt met veel aandacht en precisie, legt alles rustig en duidelijk uit en je merkt dat zij haar werk met grote zorg uitvoert. Daarnaast heeft zij een sterk esthetisch gevoel, wat duidelijk zichtbaar is in het eindresultaat.\n\nIk kan deze praktijk en deze mondhygiëniste van harte aanbevelen.",
+                "languageCode": "nl"
+            },
+            "originalText": {
+                "text": "Gisteren heb ik gebruikgemaakt van de diensten van Strijp Mondzorg en ik ben zeer tevreden.\nDe tandreiniging werd uitgevoerd door mondhygiëniste B. Tarhan. De behandeling was volledig pijnloos en zeer professioneel uitgevoerd.\n\nMevrouw Tarhan werkt met veel aandacht en precisie, legt alles rustig en duidelijk uit en je merkt dat zij haar werk met grote zorg uitvoert. Daarnaast heeft zij een sterk esthetisch gevoel, wat duidelijk zichtbaar is in het eindresultaat.\n\nIk kan deze praktijk en deze mondhygiëniste van harte aanbevelen.",
+                "languageCode": "nl"
+            },
+            "authorAttribution": {
+                "displayName": "Krzychu Zwa",
+                "uri": "https://www.google.com/maps/contrib/106340257623577551858/reviews",
+                "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocKIMpaQZWnNiOSmSByOpgFxpGgwRXIMVSzasJCRyzO1DXLsTA=s128-c0x00000000-cc-rp-mo"
+            },
+            "publishTime": "2025-12-25T11:24:30.334916444Z",
+            "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT2pOSmFtbHdkbHBJY25reGNYSTJkamxWTWpsbVIyYxAB&d=17924085&t=1",
+            "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2pOSmFtbHdkbHBJY25reGNYSTJkamxWTWpsbVIyYxAB!2m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/reviews/Ci9DQUlRQUNvZENodHljRjlvT2t0WFNrSkdaVUU0WDJGM09IQllSVUkxV1U4ME1WRRAB",
+            "relativePublishTimeDescription": "3 maanden geleden",
+            "rating": 5,
+            "text": {
+                "text": "Inmiddels meer dan een jaar geleden klant geworden van deze zeer moderne en professionele praktijk. Stap voor stap wordt je meegenomen in een plan van aanpak om je gebit mooi en gezond te houden. Marissa en Eveline bedankt voor jullie goede zorgen!",
+                "languageCode": "nl"
+            },
+            "originalText": {
+                "text": "Inmiddels meer dan een jaar geleden klant geworden van deze zeer moderne en professionele praktijk. Stap voor stap wordt je meegenomen in een plan van aanpak om je gebit mooi en gezond te houden. Marissa en Eveline bedankt voor jullie goede zorgen!",
+                "languageCode": "nl"
+            },
+            "authorAttribution": {
+                "displayName": "Rene Hozewol",
+                "uri": "https://www.google.com/maps/contrib/113270762507903165234/reviews",
+                "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUH2bt_Zg7i_578LCbIrwiTdN_jB39A4c1OEqyFzq2p0MGDG5M=s128-c0x00000000-cc-rp-mo"
+            },
+            "publishTime": "2026-01-30T19:17:48.805219820Z",
+            "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT2t0WFNrSkdaVUU0WDJGM09IQllSVUkxV1U4ME1WRRAB&d=17924085&t=1",
+            "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2t0WFNrSkdaVUU0WDJGM09IQllSVUkxV1U4ME1WRRAB!2m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/reviews/Ci9DQUlRQUNvZENodHljRjlvT21WeGJsVlRkRlpCWW00NUxWWjBaMlEwYTJJd1duYxAB",
+            "relativePublishTimeDescription": "6 maanden geleden",
+            "rating": 5,
+            "text": {
+                "text": "Een absolute aanrader!!Vanaf het eerste moment voelde ik me heel erg op mijn gemak.\nDe sfeer is erg vriendelijk en alles is perfect punctueel geregeld.\nWat meteen opvalt is dat de practijk heel modern oogt en gebbruik maakt van de nieuwste apparatuur.\nDit gaf mij het vertrouwen dat ik de best mogelijke zorg zou ontvangen.\nTijdens de behandeling werd ik door de tandarts en het team uitstekend begeleid ,waardoor ik me volledig gerustgesteld voelde.\nEen top ervaring !!",
+                "languageCode": "nl"
+            },
+            "originalText": {
+                "text": "Een absolute aanrader!!Vanaf het eerste moment voelde ik me heel erg op mijn gemak.\nDe sfeer is erg vriendelijk en alles is perfect punctueel geregeld.\nWat meteen opvalt is dat de practijk heel modern oogt en gebbruik maakt van de nieuwste apparatuur.\nDit gaf mij het vertrouwen dat ik de best mogelijke zorg zou ontvangen.\nTijdens de behandeling werd ik door de tandarts en het team uitstekend begeleid ,waardoor ik me volledig gerustgesteld voelde.\nEen top ervaring !!",
+                "languageCode": "nl"
+            },
+            "authorAttribution": {
+                "displayName": "ed genee",
+                "uri": "https://www.google.com/maps/contrib/117458395369394857682/reviews",
+                "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIbgE1kNjYfuzQIBmMz5KLS9Nu7pRAYHLs5rY_EZC_S-tax=s128-c0x00000000-cc-rp-mo"
+            },
+            "publishTime": "2025-11-05T16:41:20.157803522Z",
+            "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT21WeGJsVlRkRlpCWW00NUxWWjBaMlEwYTJJd1duYxAB&d=17924085&t=1",
+            "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21WeGJsVlRkRlpCWW00NUxWWjBaMlEwYTJJd1duYxAB!2m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/reviews/Ci9DQUlRQUNvZENodHljRjlvT25oRVUwSnNaa0pOVjFCV2IxOVZUMlZQY3pRNVVHYxAB",
+            "relativePublishTimeDescription": "6 maanden geleden",
+            "rating": 5,
+            "text": {
+                "text": "Ik ben al ruim een jaar patiënt bij deze praktijk evenals mijn echtgenoot en kinderen. Zeer tevreden. De praktijk heeft een goede samenwerking met orthodontist en logopedist zodat een adequate preventieve behandeling gestart kan worden mocht dat nodig zijn. Recent heb ik goede ervaring met een wortelkanaalbehandeling. Kundig en pijnloos, goed resultaat. Zeer hygiënisch ook. Zou deze praktijk zeker aanraden. Mijn jongste zoon heeft nog een melkgebit maar werd erg leuk en warm ontvangen. Totaal geen angst en een leuk cadeautje op het laatst.",
+                "languageCode": "nl"
+            },
+            "originalText": {
+                "text": "Ik ben al ruim een jaar patiënt bij deze praktijk evenals mijn echtgenoot en kinderen. Zeer tevreden. De praktijk heeft een goede samenwerking met orthodontist en logopedist zodat een adequate preventieve behandeling gestart kan worden mocht dat nodig zijn. Recent heb ik goede ervaring met een wortelkanaalbehandeling. Kundig en pijnloos, goed resultaat. Zeer hygiënisch ook. Zou deze praktijk zeker aanraden. Mijn jongste zoon heeft nog een melkgebit maar werd erg leuk en warm ontvangen. Totaal geen angst en een leuk cadeautje op het laatst.",
+                "languageCode": "nl"
+            },
+            "authorAttribution": {
+                "displayName": "Margareth Van Dommelen",
+                "uri": "https://www.google.com/maps/contrib/110640324552361232266/reviews",
+                "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLVCYHJhvbJjfQpyhjh61egKn-gbpeegy6t3HwcYBh6i81g0w=s128-c0x00000000-cc-rp-mo"
+            },
+            "publishTime": "2025-11-04T17:13:14.240430233Z",
+            "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT25oRVUwSnNaa0pOVjFCV2IxOVZUMlZQY3pRNVVHYxAB&d=17924085&t=1",
+            "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT25oRVUwSnNaa0pOVjFCV2IxOVZUMlZQY3pRNVVHYxAB!2m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        }
+    ],
+    "photos": [
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/photos/Ab43m-u5YFbubSMMNTe--vQxXgidodThkvd-m4xdOG_YJazdOEqEdZRjP-1l5HC478JAVymYdC8kYuB6g9PiSGKcCq2CE9OX-N0CExpZXerp5HNg3QPKm2bm-HBcLvwSuWEvRHU71nhgs8oGh4wesGgGGHNckpDZiQOx6aonUBTFWACO_vt3sLdTbv1Z2foevrKuzdHo1_bHQWW-aTv-JVyQ5Plsp84-9VJmIvX7NY31td9FKPZ0KRMIFoQ30RP30qXhf0fECQMeJyjNchH93vBSU7Hhlc6OJEUBos-RkDpM8o2LCQ",
+            "widthPx": 4800,
+            "heightPx": 4087,
+            "authorAttributions": [
+                {
+                    "displayName": "Strijp Mondzorg🦷",
+                    "uri": "https://maps.google.com/maps/contrib/105097033000901926694",
+                    "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUxW_Tu9jbzVkGN1Kw2jBNYc7lbYQK6a9Z1k5HxVhuK9-9jWac=s100-p-k-no-mo"
+                }
+            ],
+            "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipNEPCdP6XtfxM4BCnSxrHik2HG_pcvrHQXKhhIY&hl=nl",
+            "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipNEPCdP6XtfxM4BCnSxrHik2HG_pcvrHQXKhhIY!2e10!4m2!3m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/photos/Ab43m-vIFCUXowS3QC5G2uv2aKzW-YXSuR4KoutrilMU8_oIIsAcN6mM_OcwcPKfspc9WIPK1iEmhR5Brcw88JE0Z57yojPbb_EsydPNzo5QcDNTaXp8zKJejfhZ8WL4CezzaPUs9Q17HfAscwIKDQp3nW3XqcMK1BgpNg2Ox-GLluF4hqYIIBDgLwiApSUpKPXuBCVUAqd8_z2wmTe6eLNJNZDMrBqeR7IJ7jm2vDBNnJdHaPrbSZoWbf81ZCwfHXOTmHkSFkXErKmRws83VlFEQnxA64FuEpc4Cudsk0YOZL-qVTIsM4cBdN5dgqMrSiu6KzMJ8FOnv24yeuJyHfbnAfkXR6cmOUcN_mMQ6h2OoakbOuv-3DL3JNcM52RF8CIasbZ7BVYo_PryjFMjd6JzLL8M6WDz6HL-F-2M8AP0ZJ48dfd8",
+            "widthPx": 4800,
+            "heightPx": 3199,
+            "authorAttributions": [
+                {
+                    "displayName": "Marissa Roxs",
+                    "uri": "https://maps.google.com/maps/contrib/117502581191558728469",
+                    "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIuF_2qeSHVcJza1nPHdHqwgSQhQwixd1Mpl7I4KuiSs5etHQ=s100-p-k-no-mo"
+                }
+            ],
+            "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICrnZH71QE&hl=nl",
+            "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICrnZH71QE!2e10!4m2!3m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/photos/Ab43m-sWwlCvYhPVztc5t_iwEv6lO2tbDhTOP8D9K1sBbiwG5fQr06G6M82hFbbd2T9kynN2IZn_3-DUSFh8YolMdVB4fhFHb5-BhchYl4-eV45Bdh9brKLARgxTjpySxzPLO-q3oD2hgW5obNu3vXaT8pWnOujJhYiGmJdYhrt1KaFQktbp5xxKwi1onb2g418XFqaWFwL9qeXF49SI-NXV5Ao8fSKy_IijcTWakAz-xMbIGuaNu3X-8jM2ynfkASQtT6tlTRMnSHltbMscIz31dUMwpk7CdZOO4o2kh2tldk3SvQ",
+            "widthPx": 2560,
+            "heightPx": 1706,
+            "authorAttributions": [
+                {
+                    "displayName": "Strijp Mondzorg🦷",
+                    "uri": "https://maps.google.com/maps/contrib/105097033000901926694",
+                    "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUxW_Tu9jbzVkGN1Kw2jBNYc7lbYQK6a9Z1k5HxVhuK9-9jWac=s100-p-k-no-mo"
+                }
+            ],
+            "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipN4ViUAQar1TBz44FNoE1kFL_3hsU2aD_BMQWI7&hl=nl",
+            "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipN4ViUAQar1TBz44FNoE1kFL_3hsU2aD_BMQWI7!2e10!4m2!3m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/photos/Ab43m-sFp80AC6NhWCs__-ZBVqCXeX-StdqLjwnpkDJaDDd8SeKElxME4bINgkhoSihW3GuylOImE96w50fsuMg5AW6xHQwZtcXWz3R0iYkUb0uwe2A9P_EIZNSiM5g_RCHkVUyfcQqH8nkzO3-MZhB1t1mXnWk9hZ-ZONC8uPMcWy2rfTzzEyeob6mhAsHhRhysABgdD__pETeqtWWTfzvUd7a1Uet1xhsuu0e_hlz0eNfS6eyP8kCJsYQtW06oVz44H3lzsM6k2En8RAckCOs1gZX1cPwCcP-qOpjlk30KCEpOWIGJ2tKsn1kGyR8uec_yen6kt8JIcKYWXsNFBP5uEfzQMIv6OjTkznouvzsPfHwKo1fZZ4uSg8TXeJdSBAna4i4DQxJQzyiqpCqOUvk6y3PqFVNeDxPCUfccms3xuerZ2zkN",
+            "widthPx": 4800,
+            "heightPx": 3199,
+            "authorAttributions": [
+                {
+                    "displayName": "Marissa Roxs",
+                    "uri": "https://maps.google.com/maps/contrib/117502581191558728469",
+                    "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIuF_2qeSHVcJza1nPHdHqwgSQhQwixd1Mpl7I4KuiSs5etHQ=s100-p-k-no-mo"
+                }
+            ],
+            "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICrnZGtpQE&hl=nl",
+            "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICrnZGtpQE!2e10!4m2!3m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/photos/Ab43m-tcBpLv_FYpqrgqSbN3Z5jOYV2OkID9p-3xFILkO2dQAV8QmiCh29FD6Q81EjOJC1PSz3JEX0axJ-hBRsF9MONPUrzsB6tqAZb0bLcJqyqt-V_iSNVR-r9We4mj8UpPtVhBg6kPMyRLZgVzCweGPZucfd8DzMDdaPuIeLbVkq52VXY1BVgHcnUSk20XoDx0doRNKxmJHlWPqWL2kWzTdtCzgUf4cKhgdfiiX5LJwO8X9w_dwA7HvGcDWiZe9B5CTj9py2qGJIfR4pFyK8acge-vXVrtWsecxBjrHBMaj7AJPg",
+            "widthPx": 2048,
+            "heightPx": 1366,
+            "authorAttributions": [
+                {
+                    "displayName": "Strijp Mondzorg🦷",
+                    "uri": "https://maps.google.com/maps/contrib/105097033000901926694",
+                    "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUxW_Tu9jbzVkGN1Kw2jBNYc7lbYQK6a9Z1k5HxVhuK9-9jWac=s100-p-k-no-mo"
+                }
+            ],
+            "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipN3X7NBbBpHb5yP_eDhgbO90LaWBREbK_wUlXZC&hl=nl",
+            "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipN3X7NBbBpHb5yP_eDhgbO90LaWBREbK_wUlXZC!2e10!4m2!3m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/photos/Ab43m-taTghwVhII_wnntlBf7R_dSEj0cWycvgq0kU0BjcsqU5sCEBBoE3jOB00Zck1vJB0DIqkcT66wEHutCYcLCIfLJv0ji8hrgyeyuOeEsqa2Nfw4tQgs0tfng6EbRQLOkbyBSU72giXJxcpivih5e3M_Z7RYxr_ARbQOM89rzefLseHmva4O2ZpMYYZS5fuQk31v6fYPTwqcqwlB1u7MDyW-5R6RT3eabdbjsVrk1zfybKUFcqZ2U0WUp63JdZgRM0E--WeNht6pA1wWX65CbIKNQL5vkdemGiIML0S2Klkz_r0x-os4TUmbhqVGY_CHu34BAyjNugvI0ZF6nyD5jIjDbG0--cClIjNz86VbwU1d2xYMzrxpql53NKUQFeE9WsCb-SLF3NaLmkdyi0yxtQ513ZRI1ibhLWch0o9O7T0eBQ",
+            "widthPx": 4800,
+            "heightPx": 3200,
+            "authorAttributions": [
+                {
+                    "displayName": "Marissa Roxs",
+                    "uri": "https://maps.google.com/maps/contrib/117502581191558728469",
+                    "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIuF_2qeSHVcJza1nPHdHqwgSQhQwixd1Mpl7I4KuiSs5etHQ=s100-p-k-no-mo"
+                }
+            ],
+            "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICrnZGLPQ&hl=nl",
+            "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICrnZGLPQ!2e10!4m2!3m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/photos/Ab43m-v5Yjmw9eVGVZrXpv0IzXObaVfU1hQtSekhi-MQLz-T4N7BQsuaZ4M5lrySEmLa7N5p8LMV9z4m_6knErDsmKzsCZ8WRQp-7vEl_2tjs3S-05zgMEhzhOnSw1BgwJvuf04SOq8QuHbdQDGmlZeu56tkRA2Bx30WfSnXtz6Bp6YEOU6wV9xjHsrhLe-HKwuaLQLnQTgMNHzWbcYhqKBZcUtwKpv1peHqd6oj5sd7wpeu47KjyMAjXBaauJLGzvTEzu6-2k7qeaqlhSMRb849WgUFaiPqjDc5l8uHzf-iaDCmtsF09npo8M_UTn5ZLxkCX6RWFqpR8UaxNjN8UuY30sQktPVc-O8Aho5vVZXtfQKg3kESqZ8OR_xmc4hwHoYhLFvgFzp_EEhbHFFIrJrLrf2XOb01lDqCSzI6Eul4_ITrQAk",
+            "widthPx": 4800,
+            "heightPx": 3600,
+            "authorAttributions": [
+                {
+                    "displayName": "Marissa Roxs",
+                    "uri": "https://maps.google.com/maps/contrib/117502581191558728469",
+                    "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIuF_2qeSHVcJza1nPHdHqwgSQhQwixd1Mpl7I4KuiSs5etHQ=s100-p-k-no-mo"
+                }
+            ],
+            "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICrnbGHmwE&hl=nl",
+            "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICrnbGHmwE!2e10!4m2!3m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/photos/Ab43m-v1H_30XBSErdRW6pQ_IlLbQG0kLgqvMQ50QJ6ZbpvgYKeMA575ue6lphn61-jR-r5cb6xw7qQl__DPOC7zDXAYSJnFxNXDdUKBwvZ_OfyrT2WJDcRlEQ2MnhjeVO5TqEnXmxLzKwZDmr4-ggeOpVxcpk4U47i_1dQu1rd6apY1LHl9rK-oCp_Zp94vClGc0jpCx5nJIdumTFLeZ0fDodXyv67j3XE_smmxwB_zKgqwuuwDh7tfnzV2aCMt42yTRSAAWwZEs0TfURdCruN0zhHQL0OxLQO_RZVMqwlbv3WWKA",
+            "widthPx": 1024,
+            "heightPx": 682,
+            "authorAttributions": [
+                {
+                    "displayName": "Strijp Mondzorg🦷",
+                    "uri": "https://maps.google.com/maps/contrib/105097033000901926694",
+                    "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUxW_Tu9jbzVkGN1Kw2jBNYc7lbYQK6a9Z1k5HxVhuK9-9jWac=s100-p-k-no-mo"
+                }
+            ],
+            "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipMWiEzGIyhen1sOxKpCtWkgXStb01sDDFdo-GWe&hl=nl",
+            "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipMWiEzGIyhen1sOxKpCtWkgXStb01sDDFdo-GWe!2e10!4m2!3m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/photos/Ab43m-t_rF2oILwKpDB_MXXCzfd2IdQmXrYvIn1SnvuRxTkblZZudSJ1_GEkyZSYGtGN3RDNHcMLbyxPRKfoHVq3iSTz0FAKTGK3HAhXixSdV2boypHlmyIxDvnJl79dJqjRpkgymrQAt3zuei7rruzfl5stDXPOPNbDHvXrf6NV8_nHtDPm_d_q6bwzgJKiR-J69ze7_ZyofkmlhcAyP9fwP7vQ6_LXVWDdbzEO4u-fYKFQg9M9qQDhSmGjIIHyvelYjZd3t1vLAy0z4yMekAHzHTcc5njfbpgD70RcgOoaFgPxeg",
+            "widthPx": 4800,
+            "heightPx": 3200,
+            "authorAttributions": [
+                {
+                    "displayName": "Strijp Mondzorg🦷",
+                    "uri": "https://maps.google.com/maps/contrib/105097033000901926694",
+                    "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUxW_Tu9jbzVkGN1Kw2jBNYc7lbYQK6a9Z1k5HxVhuK9-9jWac=s100-p-k-no-mo"
+                }
+            ],
+            "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipO11Cws3A8hzD4daWU3gS8UPAIBfqi5qfKZkuQD&hl=nl",
+            "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipO11Cws3A8hzD4daWU3gS8UPAIBfqi5qfKZkuQD!2e10!4m2!3m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        },
+        {
+            "name": "places/ChIJ72-2Bl7ZxkcRe6CTnNk3rAI/photos/Ab43m-vPazPyS-PnynnIvOwvDRvvLFhb_Cv5rMsV-V8rOfUTOgIyYr_cJiHvx-Qksm6e8vaU814r4fUJdlyIKaQX_LMeTYZxoq9iEIe6_-vRPAyjSFTVgS-L67GfF1c4cHyAvaLpWanf8tk6aFkyKvpEcqaL-D0-_3PZr8n4jDD8l7qsG1ei7S4qypbqpCMr8B4sG3ECbcb7tcHJiiiqtodea43NAumVId254RVRSd0TB8MePBorLVE-rky2nMhgvr8K0H3ctigHj84V96vpsvCZ5dZWsUJGEH0k9DOxibfiaklSDg",
+            "widthPx": 3199,
+            "heightPx": 4800,
+            "authorAttributions": [
+                {
+                    "displayName": "Strijp Mondzorg🦷",
+                    "uri": "https://maps.google.com/maps/contrib/105097033000901926694",
+                    "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUxW_Tu9jbzVkGN1Kw2jBNYc7lbYQK6a9Z1k5HxVhuK9-9jWac=s100-p-k-no-mo"
+                }
+            ],
+            "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipOo1Y9-7AKtV2WXcbKPiY6T75QBKLJGXOj0wA0H&hl=nl",
+            "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipOo1Y9-7AKtV2WXcbKPiY6T75QBKLJGXOj0wA0H!2e10!4m2!3m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b"
+        }
+    ],
+    "restroom": true,
+    "paymentOptions": {
+        "acceptsDebitCards": true,
+        "acceptsCashOnly": false,
+        "acceptsNfc": true
+    },
+    "parkingOptions": {
+        "freeParkingLot": true,
+        "freeStreetParking": true
+    },
+    "accessibilityOptions": {
+        "wheelchairAccessibleParking": true,
+        "wheelchairAccessibleEntrance": true,
+        "wheelchairAccessibleRestroom": true,
+        "wheelchairAccessibleSeating": true
+    },
+    "pureServiceAreaBusiness": false,
+    "addressDescriptor": {
+        "landmarks": [
+            {
+                "name": "places/ChIJpWceDnTZxkcR2VRsXtMungg",
+                "placeId": "ChIJpWceDnTZxkcR2VRsXtMungg",
+                "displayName": {
+                    "text": "Albert Heijn XL",
+                    "languageCode": "nl"
+                },
+                "types": [
+                    "establishment",
+                    "food",
+                    "grocery_or_supermarket",
+                    "point_of_interest",
+                    "store",
+                    "supermarket"
+                ],
+                "straightLineDistanceMeters": 132.27126,
+                "travelDistanceMeters": 287.77942
+            },
+            {
+                "name": "places/ChIJd_30cHTZxkcRXcXFzgu7VEU",
+                "placeId": "ChIJd_30cHTZxkcRXcXFzgu7VEU",
+                "displayName": {
+                    "text": "Intersport Biggelaar",
+                    "languageCode": "nl"
+                },
+                "types": [
+                    "establishment",
+                    "point_of_interest",
+                    "store"
+                ],
+                "straightLineDistanceMeters": 136.15842,
+                "travelDistanceMeters": 181.16832
+            },
+            {
+                "name": "places/ChIJy-P8wXTZxkcRpSgVJ-vxd-U",
+                "placeId": "ChIJy-P8wXTZxkcRpSgVJ-vxd-U",
+                "displayName": {
+                    "text": "Montessori College Eindhoven",
+                    "languageCode": "nl"
+                },
+                "types": [
+                    "establishment",
+                    "point_of_interest",
+                    "school",
+                    "secondary_school"
+                ],
+                "straightLineDistanceMeters": 344.3226,
+                "travelDistanceMeters": 224.4426
+            },
+            {
+                "name": "places/ChIJIcnBKwzcxkcR9qaELwcjBlE",
+                "placeId": "ChIJIcnBKwzcxkcR9qaELwcjBlE",
+                "displayName": {
+                    "text": "Autotaalglas Eindhoven",
+                    "languageCode": "nl"
+                },
+                "types": [
+                    "car_repair",
+                    "establishment",
+                    "point_of_interest"
+                ],
+                "straightLineDistanceMeters": 304.3275,
+                "travelDistanceMeters": 300.00775
+            },
+            {
+                "name": "places/ChIJj9xVbnHZxkcRONZNjdKZ0kQ",
+                "placeId": "ChIJj9xVbnHZxkcRONZNjdKZ0kQ",
+                "displayName": {
+                    "text": "Olympia VMBO Eindhoven",
+                    "languageCode": "nl"
+                },
+                "types": [
+                    "establishment",
+                    "point_of_interest",
+                    "school",
+                    "secondary_school"
+                ],
+                "straightLineDistanceMeters": 229.2334,
+                "travelDistanceMeters": 298.929
+            }
+        ],
+        "areas": [
+            {
+                "name": "places/ChIJuWOyFXvZxkcR8yWCpC5UTEo",
+                "placeId": "ChIJuWOyFXvZxkcR8yWCpC5UTEo",
+                "displayName": {
+                    "text": "Het Ven",
+                    "languageCode": "nl"
+                },
+                "containment": "OUTSKIRTS"
+            },
+            {
+                "name": "places/ChIJHfrZgV_ZxkcRNbauV1acHow",
+                "placeId": "ChIJHfrZgV_ZxkcRNbauV1acHow",
+                "displayName": {
+                    "text": "Halve Maan",
+                    "languageCode": "nl"
+                },
+                "containment": "OUTSKIRTS"
+            },
+            {
+                "name": "places/ChIJL7z3B-rbxkcRy-eIs2XqJmw",
+                "placeId": "ChIJL7z3B-rbxkcRy-eIs2XqJmw",
+                "displayName": {
+                    "text": "Strijp",
+                    "languageCode": "nl"
+                },
+                "containment": "WITHIN"
+            }
+        ]
+    },
+    "googleMapsLinks": {
+        "directionsUri": "https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b!3e0?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "placeUri": "https://maps.google.com/?cid=192590291844440187&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "writeAReviewUri": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b!12e1?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "reviewsUri": "https://www.google.com/maps/place//data=!4m4!3m3!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b!9m1!1b1?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "photosUri": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x47c6d95e06b66fef:0x2ac37d99c93a07b!10e5?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "timeZone": {
+        "id": "Europe/Amsterdam"
+    },
+    "postalAddress": {
+        "regionCode": "NL",
+        "languageCode": "nl",
+        "postalCode": "5652 CB",
+        "locality": "Eindhoven",
+        "addressLines": [
+            "Botenlaan 82"
+        ]
+    },
+    "googleMapsTypeLabel": {
+        "text": "Tandarts",
+        "languageCode": "nl"
+    }
+}

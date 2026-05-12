@@ -65,6 +65,20 @@ export type LocationInfo = {
   parking?: string;
   publicTransport?: string;
   bike?: string;
+  restroom?: boolean;
+  parkingOptions?: {
+    freeParkingLot?: boolean;
+    paidParkingLot?: boolean;
+    freeStreetParking?: boolean;
+    paidStreetParking?: boolean;
+    valetParking?: boolean;
+  };
+  accessibilityOptions?: {
+    wheelchairAccessibleParking?: boolean;
+    wheelchairAccessibleEntrance?: boolean;
+    wheelchairAccessibleRestroom?: boolean;
+    wheelchairAccessibleSeating?: boolean;
+  };
 };
 
 export type OutreachInfo = {
@@ -94,7 +108,14 @@ export type ProspectView = {
   doctor: { name: string; salutation: string };
   reviews: { rating: number; count: number; items: ReviewItem[] };
   hours: { weekdayText: string[] };
-  location: { parking: string; publicTransport: string; bike: string };
+  location: {
+    parking: string;
+    publicTransport: string;
+    bike: string;
+    restroom?: boolean;
+    parkingOptions?: LocationInfo['parkingOptions'];
+    accessibilityOptions?: LocationInfo['accessibilityOptions'];
+  };
   outreach: OutreachInfo;
 };
 
@@ -159,6 +180,9 @@ export function getProspectView(prospect: Prospect): ProspectView {
       parking: location?.parking ?? '',
       publicTransport: location?.publicTransport ?? '',
       bike: location?.bike ?? '',
+      restroom: location?.restroom,
+      parkingOptions: location?.parkingOptions,
+      accessibilityOptions: location?.accessibilityOptions,
     },
     outreach,
   };

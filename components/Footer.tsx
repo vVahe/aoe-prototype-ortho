@@ -1,6 +1,5 @@
 import { PRACTICE_INFO } from '@/lib/constants';
 import { Phone, Mail, MapPin, Instagram, Facebook, BadgeCheck } from 'lucide-react';
-import Image from 'next/image';
 
 type FooterProps = {
   practice?: { name: string; phone: string; email?: string; address: string; website?: string };
@@ -43,11 +42,11 @@ export default function Footer({ practice }: FooterProps = {}) {
               rel="noopener noreferrer"
               className="rounded-md bg-white px-3 py-1.5 transition-opacity hover:opacity-80"
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/images/asssociations/knmt-logo.svg"
                 alt="KNMT"
                 width={80}
-                height={22}
                 className="object-contain"
               />
             </a>
@@ -57,11 +56,11 @@ export default function Footer({ practice }: FooterProps = {}) {
               rel="noopener noreferrer"
               className="rounded-md bg-white px-3 py-1.5 transition-opacity hover:opacity-80"
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/images/asssociations/nvvo-logo.svg"
                 alt="NVvO"
                 width={72}
-                height={22}
                 className="object-contain"
               />
             </a>

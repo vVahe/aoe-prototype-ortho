@@ -1,7 +1,8 @@
 import { PRACTICE_INFO } from '@/lib/constants';
-import { Car, Bus, Bike, Clock } from 'lucide-react';
+import type { LocationInfo } from '@/lib/prospects';
+import { Car, Bus, Bike, Clock, Toilet, Accessibility } from 'lucide-react';
 
-type LocationProps = { parking?: string; publicTransport?: string; bike?: string };
+type LocationProps = Pick<LocationInfo, 'parking' | 'publicTransport' | 'bike' | 'restroom' | 'parkingOptions' | 'accessibilityOptions'>;
 
 const FALLBACK_HOURS = [
   { day: 'Maandag', time: PRACTICE_INFO.hours.monday },
@@ -46,6 +47,40 @@ export default function LocationSection({
   const mapQuery  = practice?.name ? `${practice.name}, ${address}` : address;
   const mapSrc    = `https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed&hl=nl`;
 
+  const parkingText = (() => {
+    const opts = location?.parkingOptions;
+    const base = location?.parking;
+    if (!opts) return base;
+    const parts: string[] = [];
+    if (opts.freeParkingLot) parts.push('gratis parkeerplaats');
+    else if (opts.paidParkingLot) parts.push('betaalde parkeerplaats');
+    if (opts.freeStreetParking) parts.push('gratis straatparkeren');
+    else if (opts.paidStreetParking) parts.push('betaald straatparkeren');
+    if (opts.valetParking) parts.push('valet parking');
+    if (parts.length === 0) return base;
+    const options = parts.join(' en ');
+    return base ? `${base} — ${options}` : `Parkeren: ${options.charAt(0).toUpperCase() + options.slice(1)}`;
+  })();
+
+  const accessibility = location?.accessibilityOptions;
+  const isWheelchairAccessible =
+    accessibility?.wheelchairAccessibleEntrance ||
+    accessibility?.wheelchairAccessibleParking ||
+    accessibility?.wheelchairAccessibleRestroom ||
+    accessibility?.wheelchairAccessibleSeating;
+
+  const wheelchairLabel = (() => {
+    if (!accessibility) return null;
+    const features: string[] = [];
+    if (accessibility.wheelchairAccessibleParking) features.push('parkeren');
+    if (accessibility.wheelchairAccessibleEntrance) features.push('ingang');
+    if (accessibility.wheelchairAccessibleRestroom) features.push('toilet');
+    if (accessibility.wheelchairAccessibleSeating) features.push('zitplaatsen');
+    return features.length > 0
+      ? `Rolstoel toegankelijk: ${features.join(', ')}`
+      : null;
+  })();
+
   return (
     <section id="contact" className="bg-surface py-16">
       <div className="mx-auto max-w-6xl px-4">
@@ -70,13 +105,13 @@ export default function LocationSection({
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
           {/* Info column */}
           <div className="space-y-8">
-            {/* Transport */}
-            {(location?.parking || location?.publicTransport || location?.bike) && (
+            {/* Transport & facilities */}
+            {(parkingText || location?.publicTransport || location?.bike || location?.restroom || isWheelchairAccessible) && (
               <div className="space-y-3">
-                {location?.parking && (
+                {parkingText && (
                   <div className="flex items-start gap-3">
                     <Car className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                    <p className="text-sm text-neutral">{location.parking}</p>
+                    <p className="text-sm text-neutral">{parkingText}</p>
                   </div>
                 )}
                 {location?.publicTransport && (
@@ -89,6 +124,18 @@ export default function LocationSection({
                   <div className="flex items-start gap-3">
                     <Bike className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                     <p className="text-sm text-neutral">{location.bike}</p>
+                  </div>
+                )}
+                {location?.restroom && (
+                  <div className="flex items-start gap-3">
+                    <Toilet className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                    <p className="text-sm text-neutral">Toilet aanwezig</p>
+                  </div>
+                )}
+                {wheelchairLabel && (
+                  <div className="flex items-start gap-3">
+                    <Accessibility className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                    <p className="text-sm text-neutral">{wheelchairLabel}</p>
                   </div>
                 )}
               </div>
@@ -118,7 +165,7 @@ export default function LocationSection({
                   }`}
                 >
                   <span>{day}</span>
-                  <span className={highlight ? 'text-primary font-semibold' : ''}>
+                  <span className={highlight && !closed ? 'text-primary font-semibold' : ''}>
                     {time}
                   </span>
                 </div>

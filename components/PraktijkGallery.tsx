@@ -30,7 +30,7 @@ export default function PraktijkGallery({ photos, city }: Props) {
     setTimeout(() => setSelected(null), 250);
   };
 
-  const visiblePhotos = photos.slice(0, 4).filter((_, i) => !failed[i]);
+  const visiblePhotos = photos.slice(0, 10).filter((_, i) => !failed[i]);
   if (visiblePhotos.length === 0) return null;
 
   const gridClass =
@@ -40,7 +40,9 @@ export default function PraktijkGallery({ photos, city }: Props) {
       ? 'grid-cols-2'
       : visiblePhotos.length === 3
       ? 'grid-cols-2 md:grid-cols-3'
-      : 'grid-cols-2 md:grid-cols-4';
+      : visiblePhotos.length <= 4
+      ? 'grid-cols-2 md:grid-cols-4'
+      : 'grid-cols-2 md:grid-cols-5';
 
   return (
     <section className="bg-white py-16">
@@ -51,7 +53,7 @@ export default function PraktijkGallery({ photos, city }: Props) {
         <p className="mb-10 text-muted">Een moderne en gastvrije omgeving voor uw behandeling.</p>
 
         <div className={`grid gap-3 ${gridClass}`}>
-          {photos.slice(0, 4).map((src, i) =>
+          {photos.slice(0, 10).map((src, i) =>
             failed[i] ? null : (
               <button
                 key={i}
