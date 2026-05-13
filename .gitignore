@@ -15,6 +15,7 @@ node_modules/
 
 # Prospect data (competitive info — lives in Vercel env var PROSPECTS_JSON)
 data/prospects.json
+data/prospects-live.json
 data/place-ids.json
 public/images/prospects/
 

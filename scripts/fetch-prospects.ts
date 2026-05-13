@@ -19,16 +19,32 @@ function loadDotEnv() {
 
 loadDotEnv();
 
+const LIVE_MODE = process.argv.includes('--live');
+
 const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 if (!API_KEY) {
   console.error('Missing GOOGLE_PLACES_API_KEY in .env');
   process.exit(1);
 }
 
+let blobPut: ((pathname: string, body: Buffer, opts: { access: 'public'; contentType: string; allowOverwrite: boolean }) => Promise<{ url: string }>) | null = null;
+
+if (LIVE_MODE) {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    console.error('Missing BLOB_READ_WRITE_TOKEN in .env (required for --live mode)');
+    process.exit(1);
+  }
+  const blobModule = await import('@vercel/blob');
+  blobPut = blobModule.put as unknown as typeof blobPut;
+  console.log('Live mode: images will be uploaded to Vercel Blob\n');
+}
+
 // ── Paths ─────────────────────────────────────────────────────────────────────
 
 const PLACE_IDS_FILE = path.join(process.cwd(), 'data', 'place-ids.json');
-const PROSPECTS_FILE = path.join(process.cwd(), 'data', 'prospects.json');
+const PROSPECTS_FILE = LIVE_MODE
+  ? path.join(process.cwd(), 'data', 'prospects-live.json')
+  : path.join(process.cwd(), 'data', 'prospects.json');
 const PHOTOS_BASE    = path.join(process.cwd(), 'public', 'images', 'prospects');
 
 // ── Places API types ──────────────────────────────────────────────────────────
@@ -224,18 +240,20 @@ async function fetchPlaceDetails(placeId: string): Promise<PlaceResult> {
   return res.json() as Promise<PlaceResult>;
 }
 
-function fileHash(filePath: string): string {
-  return crypto.createHash('md5').update(fs.readFileSync(filePath)).digest('hex');
+function bufferHash(buf: Buffer): string {
+  return crypto.createHash('md5').update(buf).digest('hex');
 }
 
-async function downloadPhoto(photoName: string, destPath: string): Promise<void> {
-  if (fs.existsSync(destPath)) return;
+async function downloadPhoto(photoName: string, destPath: string): Promise<Buffer> {
+  if (fs.existsSync(destPath)) return fs.readFileSync(destPath);
   const url = `https://places.googleapis.com/v1/${photoName}/media?maxWidthPx=4800&key=${API_KEY}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Photo fetch ${res.status}`);
-  const buf = Buffer.from(await res.arrayBuffer());
+  const raw = Buffer.from(await res.arrayBuffer());
+  const webp = await sharp(raw).webp({ quality: 80 }).toBuffer();
   fs.mkdirSync(path.dirname(destPath), { recursive: true });
-  await sharp(buf).webp({ quality: 80 }).toFile(destPath);
+  fs.writeFileSync(destPath, webp);
+  return webp;
 }
 
 function fromAddressComponents(components: AddressComponent[] | undefined, type: string) {
@@ -307,14 +325,23 @@ async function main() {
       for (const photo of candidatePhotos) {
         const filename = `${photos.length + 1}.webp`;
         const destPath = path.join(PHOTOS_BASE, slug, filename);
-        await downloadPhoto(photo.name, destPath);
-        const hash = fileHash(destPath);
+        const buf = await downloadPhoto(photo.name, destPath);
+        const hash = bufferHash(buf);
         if (seenHashes.has(hash)) {
           fs.unlinkSync(destPath);
           continue;
         }
         seenHashes.add(hash);
-        photos.push(`/images/prospects/${slug}/${filename}`);
+        if (LIVE_MODE && blobPut) {
+          const result = await blobPut(`prospects/${slug}/${filename}`, buf, {
+            access: 'public',
+            contentType: 'image/webp',
+            allowOverwrite: true,
+          });
+          photos.push(result.url);
+        } else {
+          photos.push(`/images/prospects/${slug}/${filename}`);
+        }
       }
 
       const prevLocation = (prev?.location as Record<string, unknown> | undefined) ?? {};
