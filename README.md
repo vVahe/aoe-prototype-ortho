@@ -56,7 +56,9 @@ Fetches fresh data from the Google Places API for every Place ID listed in `data
 Re-running is safe — existing `outreach` fields and already-downloaded photos are preserved.
 
 ### `npm run fetch-prospects-live`
-Same as above, but uploads each photo to **Vercel Blob** and stores the resulting `https://` URL in the output instead of a local path. Output is written to `data/prospects-live.json`.
+Same as above, but uploads each photo to **Vercel Blob** and stores the resulting `https://` URL in the output instead of a local path. Output is written to `data/prospects-live.json` and also uploaded to Blob at a stable path (`prospects-data/prospects-live.json`) so Vercel builds can fetch it.
+
+If `VERCEL_API_TOKEN` and `VERCEL_PROJECT_ID` are set in `.env`, the script also creates/updates the `PROSPECTS_BLOB_URL` env var on the Vercel project (Production + Preview) via the Vercel REST API. The first run creates it; subsequent runs are no-ops because the Blob URL is stable.
 
 Use this before a Vercel deployment. Requires `BLOB_READ_WRITE_TOKEN` in `.env` (see [Vercel deploy](#vercel-deploy)).
 
@@ -70,14 +72,15 @@ Find Place IDs via [Google Place ID Finder](https://developers.google.com/maps/d
 
 ---
 
-## Prospect data at runtime
+## Prospect data at build time
 
-The app resolves prospect data in this priority order:
+The app resolves prospect data in this priority order at build time (`generateStaticParams`):
 
-1. **`PROSPECTS_JSON` env var** — a JSON string of the full prospects array (used in Vercel deployments to avoid committing the data)
-2. **`data/prospects.json`** — local file, used when running locally
+1. **`PROSPECTS_BLOB_URL` env var** — a public Vercel Blob URL pointing to `prospects-live.json` (used in Vercel deployments to keep prospect data out of git)
+2. **`data/prospects-live.json`** — local file written by `fetch-prospects-live` (used for local production builds)
+3. **`data/prospects.json`** — local file written by `fetch-prospects` (used for `npm run dev` with local images)
 
-If neither is present the app renders with no prospects (pages return 404).
+If none are present the app renders with no prospects (pages return 404).
 
 ---
 
@@ -90,8 +93,8 @@ The app is designed to run on Vercel's **free Hobby plan**. No paid features are
 | Feature | Used for |
 |---|---|
 | Hosting + CDN | Serves the Next.js app |
-| Vercel Blob (free: 500 MB / 1 GB egress per month) | Stores practice photos as publicly accessible files |
-| Environment variables | Holds prospect data and the Blob token |
+| Vercel Blob (free: 500 MB / 1 GB egress per month) | Hosts practice photos AND the prospects JSON, as publicly accessible files |
+| Environment variables | Points the build at the prospects JSON in Blob |
 
 ### Step 1 — Add a Blob store
 
@@ -103,30 +106,32 @@ In the Vercel dashboard go to **Storage → Create → Blob**. Connect it to you
 BLOB_READ_WRITE_TOKEN=vercel_blob_rw_...
 ```
 
-### Step 3 — Fetch prospects and upload photos
+### Step 3 — Add Vercel API credentials to your local `.env` (optional but recommended)
+
+To let `fetch-prospects-live` auto-create/update the `PROSPECTS_BLOB_URL` env var on Vercel, add:
+
+```
+VERCEL_API_TOKEN=...     # Account Settings → Tokens
+VERCEL_PROJECT_ID=...    # Project Settings → General → Project ID
+```
+
+If you skip this, you can still set `PROSPECTS_BLOB_URL` manually in the Vercel dashboard (the script will print the URL).
+
+### Step 4 — Fetch prospects, upload photos + JSON, sync env var
 
 ```bash
 npm run fetch-prospects-live
 ```
 
-This writes `data/prospects-live.json` with `https://...vercel-storage.com/...` URLs for every photo.
+This writes `data/prospects-live.json`, uploads photos to Blob, uploads the JSON itself to Blob at a stable URL, and (if the Vercel credentials are set) creates or updates the `PROSPECTS_BLOB_URL` env var on your Vercel project for Production + Preview.
 
-### Step 4 — Set environment variables in Vercel
-
-In the Vercel dashboard go to **Settings → Environment Variables** and add:
-
-| Variable | Value | Environment |
-|---|---|---|
-| `PROSPECTS_JSON` | Full contents of `data/prospects-live.json` | Production, Preview |
-
-> The `BLOB_READ_WRITE_TOKEN` does **not** need to be added to Vercel environment variables — it is only used by the local fetch script, not by the running app.
+> The `BLOB_READ_WRITE_TOKEN` and `VERCEL_API_TOKEN` are **never** needed inside Vercel itself — only locally for the fetch script.
 
 ### Step 5 — Deploy
 
-Connect the repo to Vercel and deploy (or push to trigger an automatic deploy). The build runs `next build`, which calls `generateStaticParams`, reads `PROSPECTS_JSON`, and pre-renders all `/p/[slug]` pages as static HTML.
+Connect the repo to Vercel and deploy (or push to trigger an automatic deploy). The build runs `next build`, which calls `generateStaticParams`, fetches `PROSPECTS_BLOB_URL`, and pre-renders all `/p/[slug]` pages as static HTML.
 
 ### Re-fetching / updating prospects
 
-1. Run `npm run fetch-prospects-live` locally to pull fresh data and re-upload photos.
-2. Update `PROSPECTS_JSON` in Vercel with the new contents of `data/prospects-live.json`.
-3. Trigger a redeploy (or push a commit) to rebuild the static pages.
+1. Run `npm run fetch-prospects-live` locally to pull fresh data and re-upload photos + JSON. The env-var sync is a no-op on subsequent runs because the Blob URL is stable.
+2. Trigger a redeploy (push a commit, or `git commit --allow-empty -m "refresh prospects" && git push`) — the build fetches the updated JSON from the same stable URL.

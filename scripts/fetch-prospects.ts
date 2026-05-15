@@ -277,6 +277,65 @@ function pad(n: number) {
   return String(n).padStart(2, '0');
 }
 
+// ── Vercel env-var sync ───────────────────────────────────────────────────────
+
+interface VercelEnvVar {
+  id: string;
+  key: string;
+  value: string;
+  target: string[];
+}
+
+async function syncVercelEnvVar(key: string, value: string): Promise<void> {
+  const token = process.env.VERCEL_API_TOKEN;
+  const projectId = process.env.VERCEL_PROJECT_ID;
+  if (!token || !projectId) {
+    console.log(`\nSkipping Vercel env-var sync — set VERCEL_API_TOKEN and VERCEL_PROJECT_ID in .env to automate.`);
+    return;
+  }
+
+  const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
+  const targets = ['production', 'preview'];
+
+  const listRes = await fetch(`https://api.vercel.com/v9/projects/${projectId}/env`, { headers });
+  if (!listRes.ok) {
+    console.error(`Vercel env list failed (${listRes.status}): ${await listRes.text()}`);
+    return;
+  }
+  const { envs } = (await listRes.json()) as { envs: VercelEnvVar[] };
+  const existing = envs.find(e => e.key === key);
+
+  if (!existing) {
+    const createRes = await fetch(`https://api.vercel.com/v10/projects/${projectId}/env`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ key, value, type: 'plain', target: targets }),
+    });
+    if (!createRes.ok) {
+      console.error(`Vercel env create failed (${createRes.status}): ${await createRes.text()}`);
+      return;
+    }
+    console.log(`Vercel env var ${key} created (production, preview).`);
+    return;
+  }
+
+  if (existing.value === value) {
+    console.log(`Vercel env var ${key} already up to date — no change.`);
+    return;
+  }
+
+  const patchRes = await fetch(`https://api.vercel.com/v9/projects/${projectId}/env/${existing.id}`, {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify({ value, target: targets }),
+  });
+  if (!patchRes.ok) {
+    console.error(`Vercel env update failed (${patchRes.status}): ${await patchRes.text()}`);
+    return;
+  }
+  console.log(`Vercel env var ${key} updated.`);
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -407,8 +466,19 @@ async function main() {
   }
 
   fs.mkdirSync(path.dirname(PROSPECTS_FILE), { recursive: true });
-  fs.writeFileSync(PROSPECTS_FILE, JSON.stringify(results, null, 2));
+  const jsonBuf = Buffer.from(JSON.stringify(results, null, 2));
+  fs.writeFileSync(PROSPECTS_FILE, jsonBuf);
   console.log(`\nWrote ${results.length} prospect(s) → ${PROSPECTS_FILE}`);
+
+  if (LIVE_MODE && blobPut) {
+    const uploaded = await blobPut('prospects-data/prospects-live.json', jsonBuf, {
+      access: 'public',
+      contentType: 'application/json',
+      allowOverwrite: true,
+    });
+    console.log(`Uploaded JSON to Blob → ${uploaded.url}`);
+    await syncVercelEnvVar('PROSPECTS_BLOB_URL', uploaded.url);
+  }
 }
 
 main().catch(err => {

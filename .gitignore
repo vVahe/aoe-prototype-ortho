@@ -13,7 +13,7 @@ node_modules/
 # Vercel
 .vercel
 
-# Prospect data (competitive info — lives in Vercel env var PROSPECTS_JSON)
+# Prospect data (kept out of the public repo — production reads it from Vercel Blob via PROSPECTS_BLOB_URL)
 data/prospects.json
 data/prospects-live.json
 data/place-ids.json

@@ -7,9 +7,22 @@ function truncate(text: string) {
   return words.length <= MAX_WORDS ? text : words.slice(0, MAX_WORDS).join(' ') + '…';
 }
 
-function ReviewCard({ author, text }: { author: string; text: string }) {
+function ReviewCard({
+  author,
+  text,
+  isPlaceholder,
+}: {
+  author: string;
+  text: string;
+  isPlaceholder?: boolean;
+}) {
   return (
-    <figure className="w-72 shrink-0 select-none px-2">
+    <figure className="relative w-72 shrink-0 select-none px-2">
+      {isPlaceholder && (
+        <span className="absolute right-2 top-0 rounded-full bg-muted/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted">
+          Voorbeeld
+        </span>
+      )}
       <div className="mb-4 h-px w-8 bg-accent" aria-hidden />
       <blockquote>
         <p className="text-sm italic leading-relaxed text-primary/80">{text}</p>
@@ -25,10 +38,14 @@ export default function ReviewsSection({
   items,
   rating,
   count,
+  isPlaceholder,
+  googleMapsUrl,
 }: {
   items: ReviewItem[];
   rating: number;
   count: number;
+  isPlaceholder?: boolean;
+  googleMapsUrl?: string;
 }) {
   const visible = items.filter((r) => r.text && r.author && (r.rating ?? 0) >= 4);
 
@@ -41,14 +58,16 @@ export default function ReviewsSection({
   const track = Array.from({ length: reps }, () => visible).flat();
   const marqueeEnd = `${-(100 / reps).toFixed(4)}%`;
 
-  // ~4s per card feels unhurried; clamp between 20s and 60s
-  const duration = Math.min(60, Math.max(20, visible.length * 5));
+  // ~6s per card feels unhurried; clamp between 30s and 90s
+  const duration = Math.min(90, Math.max(30, visible.length * 8));
 
   return (
     <section id="recensies" className="bg-secondary py-16 pb-28 md:py-20 md:pb-32">
-      <div className="mb-10 text-center px-4">
+      <div className="mb-10 px-4 text-center">
         <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-accent">
-          Google Recensies
+          {isPlaceholder
+            ? 'Voorbeeldreviews — wordt gevuld met jullie Google-reviews bij livegang'
+            : 'Google Recensies'}
         </p>
         <h2 className="font-heading text-3xl font-bold text-primary md:text-4xl">
           Wat onze klanten zeggen
@@ -60,18 +79,40 @@ export default function ReviewsSection({
         className="relative overflow-hidden"
         style={{
           maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+          WebkitMaskImage:
+            'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
         }}
       >
         <div
-          className="flex gap-5 w-max"
-          style={{ animation: `marquee ${duration}s linear infinite`, ['--marquee-end' as string]: marqueeEnd }}
+          className="flex w-max gap-16"
+          style={{
+            animation: `marquee ${duration}s linear infinite`,
+            ['--marquee-end' as string]: marqueeEnd,
+          }}
         >
           {track.map((r, i) => (
-            <ReviewCard key={i} author={r.author!} text={truncate(r.text!)} />
+            <ReviewCard
+              key={i}
+              author={r.author!}
+              text={truncate(r.text!)}
+              isPlaceholder={isPlaceholder}
+            />
           ))}
         </div>
       </div>
+
+      {!isPlaceholder && googleMapsUrl && (
+        <div className="mt-8 text-center">
+          <a
+            href={googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-primary/60 underline transition-colors hover:text-primary/80"
+          >
+            Bekijk alle recensies op Google
+          </a>
+        </div>
+      )}
     </section>
   );
 }

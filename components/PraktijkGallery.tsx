@@ -6,9 +6,10 @@ import { X } from 'lucide-react';
 interface Props {
   photos: string[];
   city: string;
+  isPlaceholder?: boolean;
 }
 
-export default function PraktijkGallery({ photos, city }: Props) {
+export default function PraktijkGallery({ photos, city, isPlaceholder }: Props) {
   const [failed, setFailed]     = useState<Record<number, boolean>>({});
   const [selected, setSelected] = useState<string | null>(null);
   const [visible, setVisible]   = useState(false);
@@ -50,7 +51,11 @@ export default function PraktijkGallery({ photos, city }: Props) {
         <h2 className="font-heading mb-2 text-3xl font-bold text-primary md:text-4xl">
           Onze praktijk in {city}
         </h2>
-        <p className="mb-10 text-muted">Een moderne en gastvrije omgeving voor uw behandeling.</p>
+        <p className={`mb-10 ${isPlaceholder ? 'text-sm font-semibold uppercase tracking-widest text-accent' : 'text-muted'}`}>
+          {isPlaceholder
+            ? 'Voorbeeldgalerij — bij livegang plaatsen we foto\'s van jullie eigen praktijk. We helpen met een korte fotosessie of gebruiken bestaande foto\'s die jullie aanleveren.'
+            : 'Een moderne en gastvrije omgeving voor uw behandeling.'}
+        </p>
 
         <div className={`grid gap-3 ${gridClass}`}>
           {photos.slice(0, 10).map((src, i) =>
@@ -69,13 +74,22 @@ export default function PraktijkGallery({ photos, city }: Props) {
                     className="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
                     onError={() => setFailed(prev => ({ ...prev, [i]: true }))}
                   />
+                  {isPlaceholder && (
+                    <span className="absolute right-2 top-2 rounded-full bg-black/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white backdrop-blur-sm">
+                      Voorbeeld
+                    </span>
+                  )}
                 </div>
               </button>
             )
           )}
         </div>
 
-        <p className="mt-4 text-right text-xs text-muted">Foto&apos;s via Google</p>
+        <p className="mt-4 text-right text-xs text-muted">
+          {isPlaceholder
+            ? "Voorbeeldfoto's — vervangen bij livegang"
+            : "Foto's via Google"}
+        </p>
       </div>
 
       {/* Lightbox */}

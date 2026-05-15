@@ -8,7 +8,7 @@ function CaseCard({ c }: { c: (typeof BEFORE_AFTER_CASES)[number] }) {
 
   return (
     <div className="overflow-hidden rounded-xl bg-secondary shadow-sm">
-      <div className="relative h-56 w-full">
+      <div className="relative aspect-[2/1] w-full">
         {failed ? (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-neutral/20 to-primary/10">
             <span className="text-xs text-muted">Foto volgt</span>
