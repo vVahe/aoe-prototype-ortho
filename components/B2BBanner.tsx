@@ -44,6 +44,13 @@ export default function B2BBanner({ practiceName, slug }: B2BBannerProps) {
         <p className="text-center text-sm font-semibold text-white">
           Demo gemaakt voor{' '}
           <span className="text-accent">{practiceName}</span>
+          {' '}- gemaakt door{' '}
+          <a
+            href={typeof window !== 'undefined' && window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://vaheco.nl'}
+            className="text-accent underline hover:opacity-80 transition-opacity"
+          >
+            VAHECO
+          </a>
         </p>
         <div className="flex flex-1 justify-end">
           <button
