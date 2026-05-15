@@ -29,18 +29,6 @@ if (!API_KEY) {
   process.exit(1);
 }
 
-let blobPut: ((pathname: string, body: Buffer, opts: { access: 'public'; contentType: string; allowOverwrite: boolean }) => Promise<{ url: string }>) | null = null;
-
-if (LIVE_MODE) {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    console.error('Missing BLOB_READ_WRITE_TOKEN in .env (required for --live mode)');
-    process.exit(1);
-  }
-  const blobModule = await import('@vercel/blob');
-  blobPut = blobModule.put as unknown as typeof blobPut;
-  console.log(`Live mode: images will be uploaded to Vercel Blob (target: ${TARGET})\n`);
-}
-
 // ── Paths ─────────────────────────────────────────────────────────────────────
 
 const PLACE_IDS_FILE = path.join(process.cwd(), 'data', 'place-ids.json');
@@ -406,6 +394,19 @@ async function syncVercelEnvVar(
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 async function main() {
+  type BlobPutFn = (pathname: string, body: Buffer, opts: { access: 'public'; contentType: string; allowOverwrite: boolean }) => Promise<{ url: string }>;
+  let blobPut: BlobPutFn | null = null;
+
+  if (LIVE_MODE) {
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      console.error('Missing BLOB_READ_WRITE_TOKEN in .env (required for --live mode)');
+      process.exit(1);
+    }
+    const blobModule = await import('@vercel/blob');
+    blobPut = blobModule.put as unknown as BlobPutFn;
+    console.log(`Live mode: images will be uploaded to Vercel Blob (target: ${TARGET})\n`);
+  }
+
   if (!fs.existsSync(PLACE_IDS_FILE)) {
     console.error(`Missing ${PLACE_IDS_FILE} — create it with an array of Google Place IDs.`);
     process.exit(1);
