@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import { getProspectBySlug, getAllSlugs, getProspectView } from '@/lib/prospects';
 import ProspectPageClient from './ProspectPageClient';
 
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();
   return slugs.map((slug) => ({ slug }));

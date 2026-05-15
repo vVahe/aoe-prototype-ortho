@@ -127,7 +127,7 @@ function loadProspects(): Promise<Prospect[]> {
   prospectsPromise ??= (async () => {
     const blobUrl = process.env.PROSPECTS_BLOB_URL;
     if (blobUrl) {
-      const res = await fetch(blobUrl, { cache: 'force-cache' });
+      const res = await fetch(blobUrl, { cache: 'no-store' });
       if (!res.ok) {
         throw new Error(`Failed to fetch PROSPECTS_BLOB_URL (${res.status}): ${blobUrl}`);
       }
