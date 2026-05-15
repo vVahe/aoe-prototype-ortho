@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "fetch-prospects": "tsx scripts/fetch-prospects.ts",
-    "fetch-prospects-live": "tsx scripts/fetch-prospects.ts --live"
+    "fetch-prospects-live": "tsx scripts/fetch-prospects.ts --live",
+    "fetch-prospects-preview": "tsx scripts/fetch-prospects.ts --live --target=preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

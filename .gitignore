@@ -16,7 +16,9 @@ node_modules/
 # Prospect data (kept out of the public repo — production reads it from Vercel Blob via PROSPECTS_BLOB_URL)
 data/prospects.json
 data/prospects-live.json
+data/prospects-preview.json
 data/place-ids.json
+data/blob-manifest.json
 public/images/prospects/
 
 # Misc

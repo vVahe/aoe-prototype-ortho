@@ -20,6 +20,8 @@ function loadDotEnv() {
 loadDotEnv();
 
 const LIVE_MODE = process.argv.includes('--live');
+const TARGET: 'production' | 'preview' =
+  process.argv.includes('--target=preview') ? 'preview' : 'production';
 
 const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 if (!API_KEY) {
@@ -36,16 +38,38 @@ if (LIVE_MODE) {
   }
   const blobModule = await import('@vercel/blob');
   blobPut = blobModule.put as unknown as typeof blobPut;
-  console.log('Live mode: images will be uploaded to Vercel Blob\n');
+  console.log(`Live mode: images will be uploaded to Vercel Blob (target: ${TARGET})\n`);
 }
 
 // ── Paths ─────────────────────────────────────────────────────────────────────
 
 const PLACE_IDS_FILE = path.join(process.cwd(), 'data', 'place-ids.json');
 const PROSPECTS_FILE = LIVE_MODE
-  ? path.join(process.cwd(), 'data', 'prospects-live.json')
+  ? path.join(process.cwd(), 'data', TARGET === 'preview' ? 'prospects-preview.json' : 'prospects-live.json')
   : path.join(process.cwd(), 'data', 'prospects.json');
+const JSON_BLOB_PATH = TARGET === 'preview'
+  ? 'prospects-data/prospects-preview.json'
+  : 'prospects-data/prospects-live.json';
 const PHOTOS_BASE    = path.join(process.cwd(), 'public', 'images', 'prospects');
+const BLOB_MANIFEST_FILE = path.join(process.cwd(), 'data', 'blob-manifest.json');
+
+// Local cache: maps Blob pathname → { hash of last-uploaded buffer, returned URL }.
+// Lets us skip re-uploading photos whose bytes haven't changed since the previous run.
+type BlobManifest = Record<string, { hash: string; url: string }>;
+
+function loadBlobManifest(): BlobManifest {
+  if (!fs.existsSync(BLOB_MANIFEST_FILE)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(BLOB_MANIFEST_FILE, 'utf-8')) as BlobManifest;
+  } catch {
+    return {};
+  }
+}
+
+function saveBlobManifest(m: BlobManifest): void {
+  fs.mkdirSync(path.dirname(BLOB_MANIFEST_FILE), { recursive: true });
+  fs.writeFileSync(BLOB_MANIFEST_FILE, JSON.stringify(m, null, 2));
+}
 
 // ── Places API types ──────────────────────────────────────────────────────────
 
@@ -244,13 +268,20 @@ function bufferHash(buf: Buffer): string {
   return crypto.createHash('md5').update(buf).digest('hex');
 }
 
+// Google returns up to 4800px wide; we resize after download.
+// 1600 covers lightbox at 1440p displays and stays well under the 500 MB Blob free tier at scale.
+const OUTPUT_MAX_WIDTH = 1600;
+
 async function downloadPhoto(photoName: string, destPath: string): Promise<Buffer> {
   if (fs.existsSync(destPath)) return fs.readFileSync(destPath);
   const url = `https://places.googleapis.com/v1/${photoName}/media?maxWidthPx=4800&key=${API_KEY}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Photo fetch ${res.status}`);
   const raw = Buffer.from(await res.arrayBuffer());
-  const webp = await sharp(raw).webp({ quality: 80 }).toBuffer();
+  const webp = await sharp(raw)
+    .resize({ width: OUTPUT_MAX_WIDTH, withoutEnlargement: true })
+    .webp({ quality: 80 })
+    .toBuffer();
   fs.mkdirSync(path.dirname(destPath), { recursive: true });
   fs.writeFileSync(destPath, webp);
   return webp;
@@ -286,7 +317,11 @@ interface VercelEnvVar {
   target: string[];
 }
 
-async function syncVercelEnvVar(key: string, value: string): Promise<void> {
+async function syncVercelEnvVar(
+  key: string,
+  value: string,
+  target: 'production' | 'preview',
+): Promise<void> {
   const token = process.env.VERCEL_API_TOKEN;
   const projectId = process.env.VERCEL_PROJECT_ID;
   if (!token || !projectId) {
@@ -295,45 +330,77 @@ async function syncVercelEnvVar(key: string, value: string): Promise<void> {
   }
 
   const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
-  const targets = ['production', 'preview'];
 
-  const listRes = await fetch(`https://api.vercel.com/v9/projects/${projectId}/env`, { headers });
-  if (!listRes.ok) {
-    console.error(`Vercel env list failed (${listRes.status}): ${await listRes.text()}`);
-    return;
-  }
-  const { envs } = (await listRes.json()) as { envs: VercelEnvVar[] };
-  const existing = envs.find(e => e.key === key);
+  const listMatching = async (): Promise<VercelEnvVar[]> => {
+    const res = await fetch(`https://api.vercel.com/v9/projects/${projectId}/env`, { headers });
+    if (!res.ok) throw new Error(`Vercel env list failed (${res.status}): ${await res.text()}`);
+    const { envs } = (await res.json()) as { envs: VercelEnvVar[] };
+    return envs.filter(e => e.key === key);
+  };
 
-  if (!existing) {
-    const createRes = await fetch(`https://api.vercel.com/v10/projects/${projectId}/env`, {
+  const createEnv = async (val: string, targets: string[]): Promise<void> => {
+    const res = await fetch(`https://api.vercel.com/v10/projects/${projectId}/env`, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ key, value, type: 'plain', target: targets }),
+      body: JSON.stringify({ key, value: val, type: 'plain', target: targets }),
     });
-    if (!createRes.ok) {
-      console.error(`Vercel env create failed (${createRes.status}): ${await createRes.text()}`);
-      return;
+    if (!res.ok) throw new Error(`Vercel env create failed (${res.status}): ${await res.text()}`);
+  };
+
+  const patchEnv = async (id: string, val: string, targets: string[]): Promise<void> => {
+    const res = await fetch(`https://api.vercel.com/v9/projects/${projectId}/env/${id}`, {
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify({ value: val, target: targets }),
+    });
+    if (!res.ok) throw new Error(`Vercel env update failed (${res.status}): ${await res.text()}`);
+  };
+
+  try {
+    let matching = await listMatching();
+
+    // Normalize: if a legacy combined record exists (target includes both production and preview),
+    // split it into independent production-only and preview-only records so each can be updated independently.
+    const combined = matching.find(e => e.target.includes('production') && e.target.includes('preview'));
+    if (combined) {
+      await patchEnv(combined.id, combined.value, ['production']);
+      await createEnv(combined.value, ['preview']);
+      console.log(`Split legacy ${key} into separate production + preview records.`);
+      matching = await listMatching();
     }
-    console.log(`Vercel env var ${key} created (production, preview).`);
-    return;
-  }
 
-  if (existing.value === value) {
-    console.log(`Vercel env var ${key} already up to date — no change.`);
-    return;
-  }
+    const prodEnv = matching.find(e => e.target.includes('production'));
+    const previewEnv = matching.find(e => e.target.includes('preview'));
 
-  const patchRes = await fetch(`https://api.vercel.com/v9/projects/${projectId}/env/${existing.id}`, {
-    method: 'PATCH',
-    headers,
-    body: JSON.stringify({ value, target: targets }),
-  });
-  if (!patchRes.ok) {
-    console.error(`Vercel env update failed (${patchRes.status}): ${await patchRes.text()}`);
-    return;
+    if (target === 'production') {
+      if (!prodEnv) {
+        await createEnv(value, ['production']);
+        console.log(`Vercel env var ${key} (production) created.`);
+      } else if (prodEnv.value !== value) {
+        await patchEnv(prodEnv.id, value, ['production']);
+        console.log(`Vercel env var ${key} (production) updated.`);
+      } else {
+        console.log(`Vercel env var ${key} (production) already up to date.`);
+      }
+      // Default mirror: if no preview-specific record exists yet, create one pointing at production.
+      if (!previewEnv) {
+        await createEnv(value, ['preview']);
+        console.log(`Vercel env var ${key} (preview) created — mirroring production.`);
+      }
+    } else {
+      if (!previewEnv) {
+        await createEnv(value, ['preview']);
+        console.log(`Vercel env var ${key} (preview) created.`);
+      } else if (previewEnv.value !== value) {
+        await patchEnv(previewEnv.id, value, ['preview']);
+        console.log(`Vercel env var ${key} (preview) updated.`);
+      } else {
+        console.log(`Vercel env var ${key} (preview) already up to date.`);
+      }
+    }
+  } catch (err) {
+    console.error(err);
   }
-  console.log(`Vercel env var ${key} updated.`);
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
@@ -356,6 +423,10 @@ async function main() {
       if (id) existing[id] = p;
     }
   }
+
+  const blobManifest: BlobManifest = LIVE_MODE ? loadBlobManifest() : {};
+  let blobUploads = 0;
+  let blobSkips = 0;
 
   const results = [];
 
@@ -392,12 +463,23 @@ async function main() {
         }
         seenHashes.add(hash);
         if (LIVE_MODE && blobPut) {
-          const result = await blobPut(`prospects/${slug}/${filename}`, buf, {
-            access: 'public',
-            contentType: 'image/webp',
-            allowOverwrite: true,
-          });
-          photos.push(result.url);
+          const blobPath = `prospects/${slug}/${filename}`;
+          const cached = blobManifest[blobPath];
+          let url: string;
+          if (cached && cached.hash === hash) {
+            url = cached.url;
+            blobSkips++;
+          } else {
+            const result = await blobPut(blobPath, buf, {
+              access: 'public',
+              contentType: 'image/webp',
+              allowOverwrite: true,
+            });
+            url = result.url;
+            blobManifest[blobPath] = { hash, url };
+            blobUploads++;
+          }
+          photos.push(url);
         } else {
           photos.push(`/images/prospects/${slug}/${filename}`);
         }
@@ -471,13 +553,16 @@ async function main() {
   console.log(`\nWrote ${results.length} prospect(s) → ${PROSPECTS_FILE}`);
 
   if (LIVE_MODE && blobPut) {
-    const uploaded = await blobPut('prospects-data/prospects-live.json', jsonBuf, {
+    console.log(`Photo Blob uploads: ${blobUploads} new, ${blobSkips} skipped (already up to date).`);
+    saveBlobManifest(blobManifest);
+
+    const uploaded = await blobPut(JSON_BLOB_PATH, jsonBuf, {
       access: 'public',
       contentType: 'application/json',
       allowOverwrite: true,
     });
-    console.log(`Uploaded JSON to Blob → ${uploaded.url}`);
-    await syncVercelEnvVar('PROSPECTS_BLOB_URL', uploaded.url);
+    console.log(`Uploaded JSON to Blob → ${uploaded.url} (${TARGET})`);
+    await syncVercelEnvVar('PROSPECTS_BLOB_URL', uploaded.url, TARGET);
   }
 }
 

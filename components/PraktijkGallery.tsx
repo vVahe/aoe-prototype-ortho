@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { X } from 'lucide-react';
 
 interface Props {
@@ -67,11 +68,12 @@ export default function PraktijkGallery({ photos, city, isPlaceholder }: Props) 
                 onClick={() => openPhoto(src)}
               >
                 <div className="relative h-56 w-full">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={src}
                     alt={`Praktijk foto ${i + 1}`}
-                    className="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
+                    fill
+                    sizes="(max-width: 768px) 50vw, 280px"
+                    className="object-cover transition-transform duration-200 hover:scale-105"
                     onError={() => setFailed(prev => ({ ...prev, [i]: true }))}
                   />
                   {isPlaceholder && (

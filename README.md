@@ -58,11 +58,16 @@ Re-running is safe — existing `outreach` fields and already-downloaded photos 
 ### `npm run fetch-prospects-live`
 Same as above, but uploads each photo to **Vercel Blob** and stores the resulting `https://` URL in the output instead of a local path. Output is written to `data/prospects-live.json` and also uploaded to Blob at a stable path (`prospects-data/prospects-live.json`) so Vercel builds can fetch it.
 
-If `VERCEL_API_TOKEN` and `VERCEL_PROJECT_ID` are set in `.env`, the script also creates/updates the `PROSPECTS_BLOB_URL` env var on the Vercel project (Production + Preview) via the Vercel REST API. The first run creates it; subsequent runs are no-ops because the Blob URL is stable.
+If `VERCEL_API_TOKEN` and `VERCEL_PROJECT_ID` are set in `.env`, the script also creates/updates the `PROSPECTS_BLOB_URL` env var on the Vercel project (Production + Preview) via the Vercel REST API. On first run it creates two independent records — one for Production, one for Preview mirroring it — so the two environments can later diverge if needed.
 
 Use this before a Vercel deployment. Requires `BLOB_READ_WRITE_TOKEN` in `.env` (see [Vercel deploy](#vercel-deploy)).
 
 Re-running is safe — images already on disk are not re-downloaded from Google; they are re-uploaded to Blob (overwriting the same path).
+
+### `npm run fetch-prospects-preview`
+Same as `fetch-prospects-live`, but writes to the **Preview** environment only. Output goes to `data/prospects-preview.json` and Blob path `prospects-data/prospects-preview.json`; only the Preview `PROSPECTS_BLOB_URL` env var on Vercel is touched. Production stays untouched.
+
+Use this when you push a branch (or open a PR) and want the preview deploy to render different prospect data than production — e.g. testing changes against a different set of practices. If you don't need divergent data, you can skip this entirely and the preview will keep mirroring production from the last `fetch-prospects-live` run.
 
 **`data/place-ids.json` format:**
 ```json
@@ -76,7 +81,7 @@ Find Place IDs via [Google Place ID Finder](https://developers.google.com/maps/d
 
 The app resolves prospect data in this priority order at build time (`generateStaticParams`):
 
-1. **`PROSPECTS_BLOB_URL` env var** — a public Vercel Blob URL pointing to `prospects-live.json` (used in Vercel deployments to keep prospect data out of git)
+1. **`PROSPECTS_BLOB_URL` env var** — a public Vercel Blob URL pointing to `prospects-live.json` (Production) or `prospects-preview.json` (Preview), set independently per environment on Vercel
 2. **`data/prospects-live.json`** — local file written by `fetch-prospects-live` (used for local production builds)
 3. **`data/prospects.json`** — local file written by `fetch-prospects` (used for `npm run dev` with local images)
 

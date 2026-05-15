@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans, Inter, Fraunces } from 'next/font/google';
 import './globals.css';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -14,6 +14,13 @@ const inter = Inter({
   display: 'swap',
 });
 
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  axes: ['opsz'],
+  variable: '--font-fraunces',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: 'Orthodontist demo',
   robots: 'noindex, nofollow',
@@ -25,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="nl" className={`${plusJakartaSans.variable} ${inter.variable}`}>
+    <html lang="nl" className={`${plusJakartaSans.variable} ${inter.variable} ${fraunces.variable}`}>
       <body>
         <a
           href="#main-content"
