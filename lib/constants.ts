@@ -109,21 +109,21 @@ export const BEFORE_AFTER_CASES = [
     treatment: 'Vaste beugel',
     duration: '20 maanden',
     age: 'Patiënt: 12 jaar',
-    image: '/images/before-after-1.jpg',
+    image: '/images/treatments/before-after-1.jpg',
   },
   {
     id: 'case-2',
     treatment: 'Transparante aligner',
     duration: '14 maanden',
     age: 'Patiënt: 22 jaar',
-    image: '/images/before-after-2.jpg',
+    image: '/images/treatments/before-after-2.jpg',
   },
   {
     id: 'case-3',
     treatment: 'Transparante aligner',
     duration: '24 maanden',
     age: 'Patiënt: 38 jaar',
-    image: '/images/before-after-3.jpg',
+    image: '/images/treatments/before-after-3.jpg',
   },
 ];
 

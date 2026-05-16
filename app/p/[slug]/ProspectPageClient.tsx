@@ -37,7 +37,7 @@ export default function ProspectPageClient({ view }: { view: ProspectView }) {
 
   const heroPhotos =
     photos.realCount === 0
-      ? ['/images/placeholders/practice/04-exterior.webp']
+      ? ['/images/placeholders/practice/03-reception.webp']
       : view.practice.photos;
 
   return (

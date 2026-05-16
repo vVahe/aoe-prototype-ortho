@@ -34,12 +34,19 @@ export default function Home() {
   return (
     <main
       id="main-content"
-      className="min-h-screen bg-stone-50 text-stone-900"
+      className="min-h-screen overflow-x-hidden bg-stone-50 text-stone-900"
     >
       <div className="mx-auto max-w-2xl px-6 py-20 sm:py-28">
         <header>
-          <h1 className="text-lg font-semibold tracking-[0.18em] text-stone-900 sm:text-xl">
-            VAHECO
+          <h1>
+            <Image
+              src="/images/brand/vaheco_master.svg"
+              alt="VAHECO"
+              width={160}
+              height={62}
+              style={{ height: 'auto' }}
+              priority
+            />
           </h1>
           <div
             aria-hidden
@@ -50,14 +57,14 @@ export default function Home() {
 
         <section className="mt-16 space-y-8">
           <p
-            className="text-4xl font-normal leading-[1.15] text-stone-900 md:text-5xl"
+            className="hyphens-auto text-3xl font-normal leading-[1.15] text-stone-900 sm:text-4xl md:text-5xl"
             style={fraunces}
           >
             Websites die door AI worden gevonden — gebouwd voor
             orthodontistenpraktijken in Nederland.
           </p>
 
-          <p className="max-w-[60ch] text-[15px] leading-relaxed text-stone-700">
+          <p className="text-[15px] leading-relaxed text-stone-700">
             Steeds meer patiënten stellen hun eerste vraag over een beugel niet
             aan Google, maar aan ChatGPT, Perplexity of de AI-samenvatting
             bovenaan Google. De meeste praktijkwebsites zijn daar onzichtbaar.
@@ -71,7 +78,7 @@ export default function Home() {
           <h2 className="mb-3 text-xs uppercase tracking-widest text-stone-500">
             Wie
           </h2>
-          <p className="max-w-[60ch] text-[15px] leading-relaxed text-stone-700">
+          <p className="text-[15px] leading-relaxed text-stone-700">
             VAHECO is het bedrijf van Vahe Abrahamian, softwareontwikkelaar uit
             Rotterdam. De afgelopen jaren werkte hij aan digitale systemen voor
             onder andere PostNL, ANWB, Alliander, Nationale-Nederlanden,
@@ -92,11 +99,12 @@ export default function Home() {
 
         <footer className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
           <Image
-            src="/images/vahe-profile-pic.jpg"
+            src="/images/brand/vahe-profile-pic.jpg"
             alt="Vahe Abrahamian"
             width={120}
             height={120}
-            className="h-[120px] w-[120px] shrink-0 rounded-lg object-cover"
+            className="shrink-0 rounded-lg object-cover"
+            style={{ width: '120px', height: '120px' }}
           />
           <div className="text-sm leading-relaxed">
             <p className="font-semibold text-stone-900">Vahe Abrahamian</p>

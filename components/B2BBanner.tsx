@@ -12,11 +12,13 @@ export default function B2BBanner({ practiceName, slug }: B2BBannerProps) {
   const storageKey = `demoBannerDismissed:${slug}`;
   const [visible, setVisible] = useState(true);
   const [dismissing, setDismissing] = useState(false);
+  const [vahecoHref, setVahecoHref] = useState('https://vaheco.nl');
 
   useEffect(() => {
     try {
       if (localStorage.getItem(storageKey) === 'true') setVisible(false);
     } catch {}
+    if (window.location.hostname === 'localhost') setVahecoHref('http://localhost:3000');
   }, [storageKey]);
 
   function dismiss() {
@@ -46,7 +48,7 @@ export default function B2BBanner({ practiceName, slug }: B2BBannerProps) {
           <span className="text-accent">{practiceName}</span>
           {' '}- gemaakt door{' '}
           <a
-            href={typeof window !== 'undefined' && window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://vaheco.nl'}
+            href={vahecoHref}
             className="text-accent underline hover:opacity-80 transition-opacity"
           >
             VAHECO

@@ -119,6 +119,69 @@ export type ProspectView = {
   outreach: OutreachInfo;
 };
 
+// ── Demo prospect ──────────────────────────────────────────────────────────────
+// Fixed permanent slug that always exists and always uses placeholder images.
+// No photos or reviews are provided so resolvers fall back to placeholders.
+
+export const DEMO_PROSPECT: Prospect = {
+  slug: 'demo',
+  practice: {
+    name: 'Orthodontiepraktijk Verhoeven',
+    shortName: 'Verhoeven Ortho',
+    city: 'Utrecht',
+    address: 'Maliebaan 45, 3581 CD Utrecht',
+    shortAddress: 'Maliebaan 45, Utrecht',
+    postalCode: '3581 CD',
+    phone: '030 252 8890',
+    internationalPhone: '+31 30 252 8890',
+    email: 'info@orthodontieverhoeven.nl',
+    website: 'https://www.orthodontieverhoeven.nl',
+    googleMapsUrl: 'https://maps.google.com/?q=Maliebaan+45,+3581+CD+Utrecht',
+    businessStatus: 'OPERATIONAL',
+  },
+  doctor: {
+    name: 'Dr. S. Verhoeven',
+    salutation: 'Dr. Verhoeven',
+  },
+  reviews: {
+    rating: 4.9,
+    count: 127,
+    source: 'google',
+    items: [],
+  },
+  hours: {
+    weekdayText: [
+      'Maandag: 08:30 – 17:30',
+      'Dinsdag: 08:30 – 17:30',
+      'Woensdag: 08:30 – 12:30',
+      'Donderdag: 08:30 – 17:30',
+      'Vrijdag: 08:30 – 16:00',
+      'Zaterdag: Gesloten',
+      'Zondag: Gesloten',
+    ],
+  },
+  location: {
+    lat: 52.0878,
+    lng: 5.1257,
+    parking: 'Betaald parkeren in de omgeving. Parkeergarage Maliebaan op 2 minuten loopafstand.',
+    publicTransport: 'Buslijnen 5 en 11 stoppen op de hoek. Station Utrecht Centraal op 15 minuten loopafstand.',
+    bike: 'Overdekte fietsenstalling direct naast de ingang.',
+    restroom: true,
+    parkingOptions: {
+      paidParkingLot: true,
+      paidStreetParking: true,
+    },
+    accessibilityOptions: {
+      wheelchairAccessibleParking: true,
+      wheelchairAccessibleEntrance: true,
+    },
+  },
+  outreach: {
+    operatorName: 'AOE',
+    createdAt: '2025-01-01T00:00:00.000Z',
+  },
+};
+
 // ── Loader ─────────────────────────────────────────────────────────────────────
 
 let prospectsPromise: Promise<Prospect[]> | null = null;
@@ -148,13 +211,14 @@ function loadProspects(): Promise<Prospect[]> {
 // ── Accessors ──────────────────────────────────────────────────────────────────
 
 export async function getProspectBySlug(slug: string): Promise<Prospect | null> {
+  if (slug === 'demo') return DEMO_PROSPECT;
   const all = await loadProspects();
   return all.find((p) => p.slug === slug) ?? null;
 }
 
 export async function getAllSlugs(): Promise<string[]> {
   const all = await loadProspects();
-  return all.map((p) => p.slug);
+  return ['demo', ...all.map((p) => p.slug)];
 }
 
 // ── View helper ────────────────────────────────────────────────────────────────

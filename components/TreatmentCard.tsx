@@ -8,9 +8,10 @@ import { TREATMENTS } from '@/lib/constants';
 interface TreatmentCardProps {
   treatment: (typeof TREATMENTS)[number];
   onOpenBooking: () => void;
+  priority?: boolean;
 }
 
-function TreatmentCardItem({ treatment, onOpenBooking }: TreatmentCardProps) {
+function TreatmentCardItem({ treatment, onOpenBooking, priority }: TreatmentCardProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
@@ -22,6 +23,7 @@ function TreatmentCardItem({ treatment, onOpenBooking }: TreatmentCardProps) {
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 33vw"
+          priority={priority}
         />
       </div>
       <div className="p-6 flex flex-col flex-1">
@@ -102,11 +104,12 @@ export default function TreatmentCards({ onOpenBooking }: TreatmentCardsProps) {
           Voor kinderen, tieners én volwassenen — vaste beugel, Invisalign, of transparante aligner.
         </p>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {TREATMENTS.map((treatment) => (
+          {TREATMENTS.map((treatment, i) => (
             <TreatmentCardItem
               key={treatment.id}
               treatment={treatment}
               onOpenBooking={onOpenBooking}
+              priority={i === 0}
             />
           ))}
         </div>
