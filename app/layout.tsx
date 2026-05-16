@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   title: 'Orthodontist demo',
   robots: 'noindex, nofollow',
   icons: [
-    { rel: 'icon', url: '/vaheco_facicon.svg', media: '(prefers-color-scheme: light)' },
-    { rel: 'icon', url: '/vaheco_facicon_dark.svg', media: '(prefers-color-scheme: dark)' },
+    { rel: 'icon', url: '/vaheco_favicon.svg', media: '(prefers-color-scheme: light)' },
+    { rel: 'icon', url: '/vaheco_favicon_dark.svg', media: '(prefers-color-scheme: dark)' },
   ],
 };
 
